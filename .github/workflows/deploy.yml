@@ -1,6 +1,10 @@
 # This GitHub Actions workflow builds the Conductor Server and UI from source,
 # pushes the images to Amazon ECR, and deploys them to a target EC2 instance
 # using AWS Systems Manager (SSM) for secure, keyless execution.
+#
+# THIS VERSION IS CONFIGURED FOR A SELF-CONTAINED DEVELOPMENT ENVIRONMENT.
+# It runs Redis and Elasticsearch as containers on the same EC2 instance.
+# This is NOT recommended for production use.
 
 name: Build and Deploy Conductor to EC2
 
@@ -20,6 +24,7 @@ permissions:
 # Replace these with your specific AWS and application details.
 env:
   AWS_REGION: us-east-1
+  # ECR repository names cannot contain '/'. Corrected names below.
   ECR_REPOSITORY_SERVER: conductor/server
   ECR_REPOSITORY_UI: conductor/ui
   EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
@@ -52,10 +57,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # This command uses the repository root as the build context.
-          # The paths inside "docker/server/Dockerfile" (e.g., COPY docker/server/bin /app) must be relative to this root.
-          # NOTE: If this step fails with a "file not found" error, it is almost certainly because your repository's .dockerignore file
-          # is excluding the "docker/server/bin" or "docker/server/config" directories from the build context.
-          # Please check your .dockerignore file and ensure these directories are not listed.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG -f docker/server/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG" >> $GITHUB_OUTPUT
@@ -83,7 +84,6 @@ jobs:
       - name: Fix UI Dockerfile command
         run: |
           # This step explicitly adds the monaco-editor package before the build.
-          # This corrects the "file not found" error during the copy operation.
           sed -i 's|RUN yarn install && cp -r node_modules/monaco-editor public/ && yarn build|RUN yarn add monaco-editor && cp -r node_modules/monaco-editor public/ && yarn build|' docker/ui/Dockerfile
 
       - name: Build, tag, and push UI image to Amazon ECR
@@ -92,13 +92,11 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # The build context is now the repository root (.), so paths in the Dockerfile resolve correctly.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG -f docker/ui/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
   # This job deploys the newly built images to the EC2 instance.
-  # It depends on the successful completion of the build jobs.
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
@@ -121,7 +119,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           # This heredoc defines the shell script that will be executed on the EC2 instance.
-          # The docker run commands are now single-line to create valid JSON.
+          # It now runs a full development stack, including Redis and Elasticsearch.
           COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
@@ -131,18 +129,27 @@ jobs:
               "aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
               
               "echo '--- Stopping and removing old containers ---'",
-              "docker stop conductor-server conductor-ui || true",
-              "docker rm conductor-server conductor-ui || true",
+              "docker stop conductor-server conductor-ui redis elasticsearch || true",
+              "docker rm conductor-server conductor-ui redis elasticsearch || true",
+
+              "echo '--- Creating Docker network ---'",
+              "docker network create conductor-dev-net || true",
 
               "echo '--- Pulling new images from ECR ---'",
               "docker pull ${{ env.SERVER_IMAGE_URI }}",
               "docker pull ${{ env.UI_IMAGE_URI }}",
 
+              "echo '--- Starting Redis container ---'",
+              "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always redis:6.2-alpine",
+
+              "echo '--- Starting Elasticsearch container ---'",
+              "docker run -d --name elasticsearch --network conductor-dev-net -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' --restart always docker.elastic.co/elasticsearch/elasticsearch:7.17.11",
+
               "echo '--- Starting new Conductor Server container ---'",
-              "docker run -d --name conductor-server --network host -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://<YOUR_REDIS_HOST>:6379 -e conductor.elasticsearch.url=http://<YOUR_ELASTICSEARCH_HOST>:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
+              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://redis:6379 -e conductor.elasticsearch.url=http://elasticsearch:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
 
               "echo '--- Starting new Conductor UI container ---'",
-              "docker run -d --name conductor-ui --network host -p 5000:5000 -e WF_SERVER=http://localhost:8080/api --restart always ${{ env.UI_IMAGE_URI }}",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080/api --restart always ${{ env.UI_IMAGE_URI }}",
 
               "echo '--- Deployment script finished ---'"
             ]
