@@ -25,8 +25,8 @@ permissions:
 env:
   AWS_REGION: us-east-1
   # ECR repository names cannot contain '/'. Corrected names below.
-  ECR_REPOSITORY_SERVER: conductor-server
-  ECR_REPOSITORY_UI: conductor-ui
+  ECR_REPOSITORY_SERVER: conductor/server
+  ECR_REPOSITORY_UI: conductor/ui
   EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
 
 jobs:
@@ -49,6 +49,11 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Create ECR repository if it does not exist
+        run: |
+          aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY_SERVER }} --region ${{ env.AWS_REGION }} >/dev/null 2>&1 || \
+          aws ecr create-repository --repository-name ${{ env.ECR_REPOSITORY_SERVER }} --region ${{ env.AWS_REGION }}
 
       - name: Build, tag, and push server image to Amazon ECR
         id: build-image
@@ -80,6 +85,11 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Create ECR repository if it does not exist
+        run: |
+          aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY_UI }} --region ${{ env.AWS_REGION }} >/dev/null 2>&1 || \
+          aws ecr create-repository --repository-name ${{ env.ECR_REPOSITORY_UI }} --region ${{ env.AWS_REGION }}
 
       - name: Fix UI Dockerfile command
         run: |
@@ -155,7 +165,7 @@ jobs:
               "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://redis:6379 -e conductor.elasticsearch.url=http://elasticsearch:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
 
               "echo '--- Starting new Conductor UI container ---'",
-              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080/api --restart.always ${{ env.UI_IMAGE_URI }}",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080/api --restart always ${{ env.UI_IMAGE_URI }}",
 
               "echo '--- Deployment script finished ---'"
             ]
