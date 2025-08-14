@@ -1,0 +1,188 @@
+# This GitHub Actions workflow builds the Conductor Server and UI from source,
+# pushes the images to Amazon ECR, and deploys them to a target EC2 instance
+# using AWS Systems Manager (SSM) for secure, keyless execution.
+
+name: Build and Deploy Conductor to EC2
+
+on:
+  # Triggers the workflow on push events to the main branch
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# These permissions are required for the AWS OIDC integration to assume an IAM role.
+permissions:
+  id-token: write
+  contents: read
+
+# Environment variables available to all jobs in the workflow.
+# Replace these with your specific AWS and application details.
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY_SERVER: conductor-server
+  ECR_REPOSITORY_UI: conductor-ui
+  EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
+
+jobs:
+  # This job builds the Conductor Server Docker image from the source code.
+  build-server:
+    name: Build Conductor Server Image
+    runs-on: ubuntu-latest
+    outputs:
+      image_uri: ${{ steps.build-image.outputs.image }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push server image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Corrected Dockerfile path (removed trailing dot)
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG -f docker/server/Dockerfile .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  # This job builds the Conductor UI Docker image from the source code.
+  build-ui:
+    name: Build Conductor UI Image
+    runs-on: ubuntu-latest
+    outputs:
+      image_uri: ${{ steps.build-image.outputs.image }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push UI image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Corrected Dockerfile path (removed trailing dot)
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG -f docker/ui/Dockerfile .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  # This job deploys the newly built images to the EC2 instance.
+  # It depends on the successful completion of the build jobs.
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: [build-server, build-ui]
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Deploy to EC2 via SSM
+        env:
+          SERVER_IMAGE_URI: ${{ needs.build-server.outputs.image_uri }}
+          UI_IMAGE_URI: ${{ needs.build-ui.outputs.image_uri }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          # This heredoc defines the shell script that will be executed on the EC2 instance.
+          # It uses environment variables passed from GitHub Actions Secrets for configuration.
+          # IMPORTANT: You MUST create these secrets in your GitHub repository settings.
+          # Go to Settings > Secrets and variables > Actions > New repository secret
+          COMMANDS_JSON=$(cat <<EOF
+          {
+            "commands": [
+              "#!/bin/bash",
+              "set -e",
+              "echo '--- Logging into Amazon ECR ---'",
+              "aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
+              
+              "echo '--- Stopping and removing old containers ---'",
+              "docker stop conductor-server conductor-ui || true",
+              "docker rm conductor-server conductor-ui || true",
+
+              "echo '--- Pulling new images from ECR ---'",
+              "docker pull ${{ env.SERVER_IMAGE_URI }}",
+              "docker pull ${{ env.UI_IMAGE_URI }}",
+
+              "echo '--- Starting new Conductor Server container ---'",
+              "docker run -d --name conductor-server --network host \\",
+              "  -p 8080:8080 \\",
+              "  -e conductor.db.type=redis_standalone \\",
+              "  -e conductor.redis.server=redis://<YOUR_REDIS_HOST>:6379 \\",
+              "  -e conductor.elasticsearch.url=http://<YOUR_ELASTICSEARCH_HOST>:9200 \\",
+              "  --restart always \\",
+              "  ${{ env.SERVER_IMAGE_URI }}",
+
+              "echo '--- Starting new Conductor UI container ---'",
+              "docker run -d --name conductor-ui --network host \\",
+              "  -p 5000:5000 \\",
+              "  -e WF_SERVER=http://localhost:8080/api \\",
+              "  --restart always \\",
+              "  ${{ env.UI_IMAGE_URI }}",
+
+              "echo '--- Deployment script finished ---'"
+            ]
+          }
+          EOF
+          )
+
+          # This command sends the script to the EC2 instance via SSM and polls for its completion status.
+          COMMAND_ID=$(aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --comment "Deploying Conductor commit: ${{ github.sha }}" \
+            --targets "Key=InstanceIds,Values=${{ env.EC2_INSTANCE_ID }}" \
+            --parameters "$COMMANDS_JSON" \
+            --region ${{ env.AWS_REGION }} \
+            --query "Command.CommandId" \
+            --output text)
+
+          echo "Waiting for SSM command to complete..."
+          while true; do
+            STATUS=$(aws ssm list-command-invocations \
+              --command-id "$COMMAND_ID" \
+              --instance-id "${{ env.EC2_INSTANCE_ID }}" \
+              --region ${{ env.AWS_REGION }} \
+              --query 'CommandInvocations[0].Status' \
+              --output text)
+            echo "Current deployment status: $STATUS"
+
+            if [[ "$STATUS" == "Success" ]]; then
+              echo "✅ Deployment completed successfully!"
+              break
+            elif [[ "$STATUS" == "Failed" || "$STATUS" == "Cancelled" || "$STATUS" == "TimedOut" ]]; then
+              echo "❌ Deployment failed with status: $STATUS"
+              aws ssm get-command-invocation \
+                --command-id "$COMMAND_ID" \
+                --instance-id "${{ env.EC2_INSTANCE_ID }}" \
+                --query "StandardErrorContent" \
+                --output text
+              exit 1
+            fi
+            sleep 10
+          done
