@@ -1,36 +1,22 @@
-# This GitHub Actions workflow builds the Conductor Server and UI from source,
-# pushes the images to Amazon ECR, and deploys them to a target EC2 instance
-# using AWS Systems Manager (SSM) for secure, keyless execution.
-#
-# THIS VERSION IS CONFIGURED FOR A SELF-CONTAINED DEVELOPMENT ENVIRONMENT.
-# It runs Redis and Elasticsearch as containers on the same EC2 instance.
-# This is NOT recommended for production use.
 
 name: Build and Deploy Conductor to EC2
 
 on:
-  # Triggers the workflow on push events to the main branch
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# These permissions are required for the AWS OIDC integration to assume an IAM role.
 permissions:
   id-token: write
   contents: read
 
-# Environment variables available to all jobs in the workflow.
-# Replace these with your specific AWS and application details.
 env:
   AWS_REGION: us-east-1
-  # ECR repository names cannot contain '/'. Corrected names below.
   ECR_REPOSITORY_SERVER: conductor/server
   ECR_REPOSITORY_UI: conductor/ui
-  EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
+  EC2_INSTANCE_ID: i-0f3825346d84a197a 
 
 jobs:
-  # This job builds the Conductor Server Docker image from the source code.
   build-server:
     name: Build Conductor Server Image
     runs-on: ubuntu-latest
@@ -43,7 +29,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole 
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -61,7 +47,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-  # This job builds the Conductor UI Docker image from the source code.
   build-ui:
     name: Build Conductor UI Image
     runs-on: ubuntu-latest
@@ -74,7 +59,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole 
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -96,7 +81,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-  # This job deploys the newly built images to the EC2 instance.
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
@@ -119,7 +103,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           # This heredoc defines the shell script that will be executed on the EC2 instance.
-          # It now includes more robust cleanup steps to prevent "no space left on device" errors.
+          # It now runs the full 8-container development stack.
           COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
@@ -129,8 +113,8 @@ jobs:
               "aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
               
               "echo '--- Stopping and removing old containers ---'",
-              "docker stop conductor-server conductor-ui redis elasticsearch || true",
-              "docker rm conductor-server conductor-ui redis elasticsearch || true",
+              "docker stop conductor-server conductor-ui redis elasticsearch mongo schellar nats nats-streaming || true",
+              "docker rm conductor-server conductor-ui redis elasticsearch mongo schellar nats nats-streaming || true",
 
               "echo '--- Cleaning up Docker system to free up space ---'",
               "docker system prune -af",
@@ -150,9 +134,21 @@ jobs:
 
               "echo '--- Starting Elasticsearch container ---'",
               "docker run -d --name elasticsearch --network conductor-dev-net -p 9200:9200 -p 9300:9300 -e 'discovery.type=single-node' --restart always docker.elastic.co/elasticsearch/elasticsearch:7.17.11",
+              
+              "echo '--- Starting MongoDB container ---'",
+              "docker run -d --name mongo --network conductor-dev-net -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root --restart always mongo:4.1.10",
+
+              "echo '--- Starting NATS container ---'",
+              "docker run -d --name nats --network conductor-dev-net -p 4222:4222 -p 8222:8222 --restart always nats:latest -js --http_port 8222",
+
+              "echo '--- Starting NATS Streaming container ---'",
+              "docker run -d --name nats-streaming --network conductor-dev-net -p 4223:4222 -p 8223:8222 --restart always nats-streaming:latest",
 
               "echo '--- Starting new Conductor Server container ---'",
               "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://redis:6379 -e conductor.elasticsearch.url=http://elasticsearch:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
+
+              "echo '--- Starting Schellar container ---'",
+              "docker run -d --name schellar --network conductor-dev-net -p 3001:3000 -e CONDUCTOR_API_URL=http://conductor-server:8080/api -e MONGO_ADDRESS=mongo -e MONGO_USERNAME=root -e MONGO_PASSWORD=root --restart always flaviostutz/schellar",
 
               "echo '--- Starting new Conductor UI container ---'",
               "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080/api --restart always ${{ env.UI_IMAGE_URI }}",
