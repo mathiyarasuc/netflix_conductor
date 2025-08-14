@@ -20,8 +20,8 @@ permissions:
 # Replace these with your specific AWS and application details.
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY_SERVER: conductor-server
-  ECR_REPOSITORY_UI: conductor-ui
+  ECR_REPOSITORY_SERVER: conductor/server
+  ECR_REPOSITORY_UI: conductor/ui
   EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
 
 jobs:
