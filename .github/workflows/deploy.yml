@@ -20,8 +20,8 @@ permissions:
 # Replace these with your specific AWS and application details.
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY_SERVER: conductor/server
-  ECR_REPOSITORY_UI: conductor/ui
+  ECR_REPOSITORY_SERVER: conductor-server
+  ECR_REPOSITORY_UI: conductor-ui
   EC2_INSTANCE_ID: i-0f3825346d84a197a # <-- IMPORTANT: Replace with your EC2 Instance ID
 
 jobs:
@@ -45,10 +45,11 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Create ECR repository if it does not exist
+      - name: Fix Dockerfile paths for server build
         run: |
-          aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY_SERVER }} --region ${{ env.AWS_REGION }} >/dev/null 2>&1 || \
-          aws ecr create-repository --repository-name ${{ env.ECR_REPOSITORY_SERVER }} --region ${{ env.AWS_REGION }}
+          # This step corrects the COPY paths in the Dockerfile to be relative to the new build context.
+          sed -i 's|COPY docker/server/bin /app|COPY bin /app|' docker/server/Dockerfile
+          sed -i 's|COPY docker/server/config /app/config|COPY config /app/config|' docker/server/Dockerfile
 
       - name: Build, tag, and push server image to Amazon ECR
         id: build-image
@@ -56,9 +57,8 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # Corrected build command: The context is the repository root (.)
-          # The Dockerfile paths are relative to this root.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG -f docker/server/Dockerfile .
+          # Corrected build command: The context is changed to 'docker/server' to match the fixed paths in the Dockerfile.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG -f docker/server/Dockerfile docker/server
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
@@ -81,11 +81,6 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Create ECR repository if it does not exist
-        run: |
-          aws ecr describe-repositories --repository-names ${{ env.ECR_REPOSITORY_UI }} --region ${{ env.AWS_REGION }} >/dev/null 2>&1 || \
-          aws ecr create-repository --repository-name ${{ env.ECR_REPOSITORY_UI }} --region ${{ env.AWS_REGION }}
 
       - name: Build, tag, and push UI image to Amazon ECR
         id: build-image
