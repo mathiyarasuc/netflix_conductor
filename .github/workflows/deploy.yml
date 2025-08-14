@@ -131,9 +131,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           # This heredoc defines the shell script that will be executed on the EC2 instance.
-          # It uses environment variables passed from GitHub Actions Secrets for configuration.
-          # IMPORTANT: You MUST create these secrets in your GitHub repository settings.
-          # Go to Settings > Secrets and variables > Actions > New repository secret
+          # The docker run commands are now single-line to create valid JSON.
           COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
@@ -151,20 +149,10 @@ jobs:
               "docker pull ${{ env.UI_IMAGE_URI }}",
 
               "echo '--- Starting new Conductor Server container ---'",
-              "docker run -d --name conductor-server --network host \\",
-              "  -p 8080:8080 \\",
-              "  -e conductor.db.type=redis_standalone \\",
-              "  -e conductor.redis.server=redis://<YOUR_REDIS_HOST>:6379 \\",
-              "  -e conductor.elasticsearch.url=http://<YOUR_ELASTICSEARCH_HOST>:9200 \\",
-              "  --restart always \\",
-              "  ${{ env.SERVER_IMAGE_URI }}",
+              "docker run -d --name conductor-server --network host -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://<YOUR_REDIS_HOST>:6379 -e conductor.elasticsearch.url=http://<YOUR_ELASTICSEARCH_HOST>:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
 
               "echo '--- Starting new Conductor UI container ---'",
-              "docker run -d --name conductor-ui --network host \\",
-              "  -p 5000:5000 \\",
-              "  -e WF_SERVER=http://localhost:8080/api \\",
-              "  --restart always \\",
-              "  ${{ env.UI_IMAGE_URI }}",
+              "docker run -d --name conductor-ui --network host -p 5000:5000 -e WF_SERVER=http://localhost:8080/api --restart always ${{ env.UI_IMAGE_URI }}",
 
               "echo '--- Deployment script finished ---'"
             ]
