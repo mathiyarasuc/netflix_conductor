@@ -29,8 +29,17 @@ RUN ls -ltr
 RUN git clone https://github.com/Netflix/conductor-community.git
 # Copy the project directly onto the image
 WORKDIR conductor-community
+
+# CRITICAL FIX: Add Redis persistence to the build
+WORKDIR community-server
+RUN echo "" >> build.gradle
+RUN echo "dependencies {" >> build.gradle  
+RUN echo "    implementation 'com.netflix.conductor:conductor-redis-persistence:3.15.0'" >> build.gradle
+RUN echo "}" >> build.gradle
+WORKDIR ..
+
 RUN ls -ltr
-# Build the server on run
+# Build the server with Redis support
 RUN ./gradlew build -x test --stacktrace
 RUN ls -ltr
 RUN pwd
