@@ -1,69 +1,33 @@
 #
-# conductor:server - Combined Netflix conductor server & UI
+# conductor:ui - UI Only Build (Server uses working image)
 #
-# ===========================================================================================================
-# 0. Builder stage
-# ===========================================================================================================
 FROM alpine:3.18 AS builder
 LABEL maintainer="Netflix OSS <conductor@netflix.com>"
-# ===========================================================================================================
-# 0. Build Conductor Server
-# ===========================================================================================================
-# Install dependencies
-RUN apk add openjdk17
-RUN apk add git
-RUN apk add curl
-RUN apk add --update nodejs npm yarn
+
+# Install dependencies for UI build only
+RUN apk add --update nodejs npm yarn curl
+
+# Build UI
 COPY . /conductor
 WORKDIR /conductor/ui
+
 # Include monaco sources into bundle (instead of using CDN)
 ENV REACT_APP_MONACO_EDITOR_USING_CDN=false
 RUN yarn install && cp -r node_modules/monaco-editor public/ && yarn build
-RUN ls -ltr
-RUN echo "Done building UI"
-# Checkout the community project
-WORKDIR /
-RUN mkdir server-build
-WORKDIR  server-build
-RUN ls -ltr
-RUN git clone https://github.com/Netflix/conductor-community.git
-# Copy the project directly onto the image
-WORKDIR conductor-community
 
-# CRITICAL FIX: Add Redis persistence to the build
-WORKDIR community-server
-RUN echo "" >> build.gradle
-RUN echo "dependencies {" >> build.gradle  
-RUN echo "    implementation 'com.netflix.conductor:conductor-redis-persistence:3.15.0'" >> build.gradle
-RUN echo "}" >> build.gradle
-WORKDIR ..
-
-RUN ls -ltr
-# Build the server with Redis support
-RUN ./gradlew build -x test --stacktrace
-RUN ls -ltr
-RUN pwd
 # ===========================================================================================================
-# 1. Bin stage
+# Final stage - nginx for UI
 # ===========================================================================================================
-FROM alpine:3.18
+FROM nginx:alpine
 LABEL maintainer="Netflix OSS <conductor@netflix.com>"
-RUN apk add openjdk17
-RUN apk add nginx
-RUN apk add curl
-# Make app folders
-RUN mkdir -p /app/config /app/logs /app/libs
-# Copy the compiled output to new image
-COPY docker/server/bin /app
-COPY docker/server/config /app/config
-COPY --from=builder /server-build/conductor-community/community-server/build/libs/*boot*.jar /app/libs/conductor-server.jar
-# Copy compiled UI assets to nginx www directory
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=builder /conductor/ui/build .
-COPY --from=builder /conductor/docker/server/nginx/nginx.conf /etc/nginx/http.d/default.conf
-# Copy the files for the server into the app folders
-RUN chmod +x /app/startup.sh
-HEALTHCHECK --interval=60s --timeout=30s --retries=10 CMD curl -I -XGET http://localhost:8080/health || exit 1
-CMD [ "/app/startup.sh" ]
-ENTRYPOINT [ "/bin/sh"]
+
+# Copy compiled UI assets
+COPY --from=builder /conductor/ui/build /usr/share/nginx/html
+COPY --from=builder /conductor/docker/ui/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Health check
+HEALTHCHECK --interval=60s --timeout=30s --retries=10 \
+    CMD curl -f http://localhost:5000 || exit 1
+
+EXPOSE 5000
+CMD ["nginx", "-g", "daemon off;"]
