@@ -1,4 +1,3 @@
-
 name: Build and Deploy Conductor to EC2
 
 on:
@@ -14,7 +13,7 @@ env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY_SERVER: conductor/server
   ECR_REPOSITORY_UI: conductor/ui
-  EC2_INSTANCE_ID: i-0f3825346d84a197a 
+  EC2_INSTANCE_ID: i-0f3825346d84a197a
 
 jobs:
   build-server:
@@ -29,7 +28,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole 
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -42,7 +41,6 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          # This command uses the repository root as the build context.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG -f docker/server/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_SERVER:$IMAGE_TAG" >> $GITHUB_OUTPUT
@@ -59,7 +57,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole 
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -68,7 +66,6 @@ jobs:
 
       - name: Fix UI Dockerfile command
         run: |
-          # This step explicitly adds the monaco-editor package before the build.
           sed -i 's|RUN yarn install && cp -r node_modules/monaco-editor public/ && yarn build|RUN yarn add monaco-editor && cp -r node_modules/monaco-editor public/ && yarn build|' docker/ui/Dockerfile
 
       - name: Build, tag, and push UI image to Amazon ECR
@@ -89,7 +86,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole # <-- IMPORTANT: Replace with your IAM Role ARN
+          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -102,8 +99,6 @@ jobs:
           UI_IMAGE_URI: ${{ needs.build-ui.outputs.image_uri }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          # This heredoc defines the shell script that will be executed on the EC2 instance.
-          # It now runs the full 8-container development stack.
           COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
@@ -145,7 +140,7 @@ jobs:
               "docker run -d --name nats-streaming --network conductor-dev-net -p 4223:4222 -p 8223:8222 --restart always nats-streaming:latest",
 
               "echo '--- Starting new Conductor Server container ---'",
-              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e conductor.db.type=redis_standalone -e conductor.redis.server=redis://redis:6379 -e conductor.elasticsearch.url=http://elasticsearch:9200 --restart always ${{ env.SERVER_IMAGE_URI }}",
+              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e conductor.db.type=elasticsearch -e conductor.elasticsearch.url=http://elasticsearch:9200 -e conductor.queue.type=redis -e conductor.redis-queue.host=redis -e conductor.redis-queue.port=6379 --restart always ${{ env.SERVER_IMAGE_URI }}",
 
               "echo '--- Starting Schellar container ---'",
               "docker run -d --name schellar --network conductor-dev-net -p 3001:3000 -e CONDUCTOR_API_URL=http://conductor-server:8080/api -e MONGO_ADDRESS=mongo -e MONGO_USERNAME=root -e MONGO_PASSWORD=root --restart always flaviostutz/schellar",
@@ -159,7 +154,6 @@ jobs:
           EOF
           )
 
-          # This command sends the script to the EC2 instance via SSM and polls for its completion status.
           COMMAND_ID=$(aws ssm send-command \
             --document-name "AWS-RunShellScript" \
             --comment "Deploying Conductor commit: ${{ github.sha }}" \
