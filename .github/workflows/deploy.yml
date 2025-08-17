@@ -139,8 +139,8 @@ jobs:
               "echo '--- Starting NATS Streaming container ---'",
               "docker run -d --name nats-streaming --network conductor-dev-net -p 4223:4222 -p 8223:8222 --restart always nats-streaming:latest",
 
-              "echo '--- Starting new Conductor Server container ---'",
-              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -e CONDUCTOR_DB_TYPE=elasticsearch -e CONDUCTOR_ELASTICSEARCH_URL=http://elasticsearch:9200 -e CONDUCTOR_QUEUE_TYPE=redis -e CONDUCTOR_REDIS_QUEUE_HOST=redis -e CONDUCTOR_REDIS_QUEUE_PORT=6379 --restart always ${{ env.SERVER_IMAGE_URI }}",
+              "echo '--- Starting new Conductor Server container (Bypassing startup.sh) ---'",
+              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 --restart always --entrypoint java ${{ env.SERVER_IMAGE_URI }} -Dconductor.db.type=elasticsearch -Dconductor.elasticsearch.url=http://elasticsearch:9200 -Dconductor.queue.type=redis -Dconductor.redis-queue.host=redis -Dconductor.redis-queue.port=6379 -jar /app/libs/conductor-server.jar",
 
               "echo '--- Starting Schellar container ---'",
               "docker run -d --name schellar --network conductor-dev-net -p 3001:3000 -e CONDUCTOR_API_URL=http://conductor-server:8080/api -e MONGO_ADDRESS=mongo -e MONGO_USERNAME=root -e MONGO_PASSWORD=root --restart always flaviostutz/schellar",
