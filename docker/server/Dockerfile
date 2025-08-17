@@ -30,16 +30,8 @@ RUN git clone https://github.com/Netflix/conductor-community.git
 # Copy the project directly onto the image
 WORKDIR conductor-community
 RUN ls -ltr
-
 # Build the server on run
 RUN ./gradlew build -x test --stacktrace
-
-# Download MongoDB persistence JAR
-WORKDIR /server-build
-RUN mkdir -p persistence-libs
-RUN curl -L -o persistence-libs/conductor-mongodb-persistence-3.16.0.jar \
-    https://repo1.maven.org/maven2/com/netflix/conductor/conductor-mongodb-persistence/3.16.0/conductor-mongodb-persistence-3.16.0.jar
-
 RUN ls -ltr
 RUN pwd
 # ===========================================================================================================
@@ -56,10 +48,6 @@ RUN mkdir -p /app/config /app/logs /app/libs
 COPY docker/server/bin /app
 COPY docker/server/config /app/config
 COPY --from=builder /server-build/conductor-community/community-server/build/libs/*boot*.jar /app/libs/conductor-server.jar
-
-# Copy MongoDB persistence JAR
-COPY --from=builder /server-build/persistence-libs/conductor-mongodb-persistence-3.16.0.jar /app/libs/
-
 # Copy compiled UI assets to nginx www directory
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
