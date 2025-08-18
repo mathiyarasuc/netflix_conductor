@@ -97,7 +97,7 @@ jobs:
               "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always -v redis-data:/data redis:6.2-alpine redis-server --save 20 1 --loglevel warning",
 
               "echo '--- Starting Elasticsearch container (Search/Indexing) ---'",
-              "docker run -d --name elasticsearch --network conductor-dev-net -p 9200:9200 -p 9300:9300 -e 'ES_JAVA_OPTS=-Xms512m -Xmx1024m' -e 'transport.host=0.0.0.0' -e 'discovery.type=single-node' -e 'xpack.security.enabled=false' -v elasticsearch-data:/usr/share/elasticsearch/data --restart always elasticsearch:7.17.9",
+              "docker run -d --name elasticsearch --network conductor-dev-net --network-alias es -p 9200:9200 -p 9300:9300 -e 'ES_JAVA_OPTS=-Xms512m -Xmx1024m' -e 'transport.host=0.0.0.0' -e 'discovery.type=single-node' -e 'xpack.security.enabled=false' -v elasticsearch-data:/usr/share/elasticsearch/data --restart always elasticsearch:7.17.9",
               
               "echo '--- Starting MongoDB container (For Schellar only) ---'",
               "docker run -d --name mongo --network conductor-dev-net -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -v mongo-data:/data/db --restart always mongo:4.1.10",
