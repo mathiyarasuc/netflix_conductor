@@ -11,47 +11,12 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY_UI: conductor/ui
   EC2_INSTANCE_ID: i-0f3825346d84a197a
 
 jobs:
-  build-ui:
-    name: Build Conductor UI Image
-    runs-on: ubuntu-latest
-    outputs:
-      image_uri: ${{ steps.build-image.outputs.image }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Fix UI Dockerfile command
-        run: |
-          sed -i 's|RUN yarn install && cp -r node_modules/monaco-editor public/ && yarn build|RUN yarn add monaco-editor && cp -r node_modules/monaco-editor public/ && yarn build|' docker/ui/Dockerfile
-
-      - name: Build, tag, and push UI image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG -f docker/ui/Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY_UI:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
-    needs: [build-ui]
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -59,23 +24,14 @@ jobs:
           role-to-assume: arn:aws:iam::867344440197:role/GitHubActionsRole
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
       - name: Deploy to EC2 via SSM
-        env:
-          UI_IMAGE_URI: ${{ needs.build-ui.outputs.image_uri }}
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
               "#!/bin/bash",
               "set -e",
-              "echo '--- PRODUCTION DEPLOYMENT WITH WORKING IMAGE ---'",
-              "echo '--- Logging into Amazon ECR ---'",
-              "aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}",
+              "echo '--- PRODUCTION DEPLOYMENT WITH OFFICIAL IMAGES ---'",
               
               "echo '--- Stopping and removing old containers ---'",
               "docker stop conductor-server conductor-ui redis elasticsearch mongo schellar nats nats-streaming || true",
@@ -89,9 +45,6 @@ jobs:
 
               "echo '--- Creating Docker network ---'",
               "docker network create conductor-dev-net",
-
-              "echo '--- Pulling UI image from ECR ---'",
-              "docker pull ${{ env.UI_IMAGE_URI }}",
 
               "echo '--- Starting Redis container (Primary DB + Queue) ---'",
               "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always -v redis-data:/data redis:6.2-alpine redis-server --save 20 1 --loglevel warning",
@@ -111,14 +64,14 @@ jobs:
               "echo '--- Waiting for services to be ready ---'",
               "sleep 30",
 
-              "echo '--- Starting Conductor Server (WORKING IMAGE) ---'",
+              "echo '--- Starting Conductor Server (Official Image) ---'",
               "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 --restart always -e CONFIG_PROP=config-local.properties -e ES_VERSION=7 -e INDEXING_ENABLED=true -e JAVA_OPTS='-Dpolyglot.engine.WarnInterpreterOnly=false' niemen/conductor-server:7.2.2",
 
               "echo '--- Starting Schellar container ---'",
               "docker run -d --name schellar --network conductor-dev-net -p 3001:3000 -e CONDUCTOR_API_URL=http://conductor-server:8080/api -e MONGO_ADDRESS=mongo -e MONGO_USERNAME=root -e MONGO_PASSWORD=root --restart always flaviostutz/schellar",
 
-              "echo '--- Starting Conductor UI (Custom Build) ---'",
-              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always ${{ env.UI_IMAGE_URI }}",
+              "echo '--- Starting Conductor UI (Official Image) ---'",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always niemen/conductor-ui:4.0.1",
 
               "echo '--- PRODUCTION DEPLOYMENT COMPLETED SUCCESSFULLY ---'"
             ]
@@ -128,7 +81,7 @@ jobs:
 
           COMMAND_ID=$(aws ssm send-command \
             --document-name "AWS-RunShellScript" \
-            --comment "PRODUCTION Deployment with Working Image - Commit: ${{ github.sha }}" \
+            --comment "PRODUCTION Deployment with Official Images - Commit: ${{ github.sha }}" \
             --targets "Key=InstanceIds,Values=${{ env.EC2_INSTANCE_ID }}" \
             --parameters "$COMMANDS_JSON" \
             --region ${{ env.AWS_REGION }} \
