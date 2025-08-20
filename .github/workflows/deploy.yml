@@ -90,7 +90,7 @@ jobs:
 
           COMMAND_ID=$(aws ssm send-command \
             --document-name "AWS-RunShellScript" \
-            --comment "PRODUCTION Deployment with Corrected Health Checks - Commit: ${{ github.sha }}" \
+            --comment "Deploy Conductor with Health Checks" \
             --targets "Key=InstanceIds,Values=${{ env.EC2_INSTANCE_ID }}" \
             --parameters "$COMMANDS_JSON" \
             --region ${{ env.AWS_REGION }} \
@@ -108,7 +108,7 @@ jobs:
             echo "PRODUCTION deployment status: $STATUS"
 
             if [[ "$STATUS" == "Success" ]]; then
-              echo "✅ PRODUCTION DEPLOYMENT WITH CORRECTED HEALTH CHECKS COMPLETED SUCCESSFULLY!"
+              echo "✅ DEPLOYMENT WITH CORRECTED HEALTH CHECKS COMPLETED SUCCESSFULLY!"
               break
             elif [[ "$STATUS" == "Failed" || "$STATUS" == "Cancelled" || "$STATUS" == "TimedOut" ]]; then
               echo "❌ PRODUCTION DEPLOYMENT FAILED with status: $STATUS"
