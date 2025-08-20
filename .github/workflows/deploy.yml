@@ -74,7 +74,7 @@ jobs:
               "docker run -d --name schellar --network conductor-dev-net -p 3001:3000 -e CONDUCTOR_API_URL=http://conductor-server:8080/api -e MONGO_ADDRESS=mongo -e MONGO_USERNAME=root -e MONGO_PASSWORD=root --restart always --health-cmd='curl -f http://localhost:3000 || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=30s flaviostutz/schellar",
 
               "echo '--- Starting Conductor UI (Official Image) with Health Check ---'",
-              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='curl -f http://localhost:5000 || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=40s niemen/conductor-ui:4.0.1",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=40s niemen/conductor-ui:4.0.1",
 
               "echo '--- Waiting for all services to stabilize ---'",
               "sleep 30",
