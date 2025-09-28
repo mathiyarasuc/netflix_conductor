@@ -73,7 +73,7 @@ jobs:
               "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -p 8090:8090 --restart always -e CONFIG_PROP=config-local.properties -e ES_VERSION=7 -e INDEXING_ENABLED=true -e JAVA_OPTS='-Dpolyglot.engine.WarnInterpreterOnly=false' --health-cmd='curl -f http://localhost:8080/health || exit 1' --health-interval=30s --health-timeout=15s --health-retries=5 --health-start-period=90s niemen/conductor-server:7.2.2",
 
               "echo '--- Starting Conductor UI (Official Image) with Health Check ---'",
-              "docker run -d --name conductor-ui --network conductor-dev-net -p 5001:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=40s niemen/conductor-ui:4.0.1",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=40s niemen/conductor-ui:4.0.1",
 
               "echo '--- Waiting for Conductor services to stabilize ---'",
               "sleep 30",
@@ -84,11 +84,11 @@ jobs:
 
               "echo '--- Building and starting GQL BFF (GraphQL Backend) - FIXED for GraphQL Mesh hostname bug ---'",
               "docker build -t gql-bff:latest ./gql-bff",
-              "docker run -d --name gql-bff --network conductor-dev-net -p 5000:5000 -e NODE_ENV=development -e PORT=5000 -e ELASTIC_SEARCH_HOST=http://elasticsearch:9200 -e ELASTIC_USER= -e ELASTIC_PASSWORD= -e ELASTIC_VERSION=7 -e ELASTIC_PREFIX=atlas -e APOLLO_LOGGING_LEVEL=ERROR -e TOOLS_API_URL=http://flask-server:7000 -e AGENTS_API_URL=http://flask-server:7000 -e BASE_API_URL=http://host.docker.internal:8080 -e IS_MULTITENANT=false --add-host host.docker.internal:172.17.0.1 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
+              "docker run -d --name gql-bff --network conductor-dev-net -p 5001:5000 -e NODE_ENV=development -e PORT=5000 -e ELASTIC_SEARCH_HOST=http://elasticsearch:9200 -e ELASTIC_USER= -e ELASTIC_PASSWORD= -e ELASTIC_VERSION=7 -e ELASTIC_PREFIX=atlas -e APOLLO_LOGGING_LEVEL=ERROR -e TOOLS_API_URL=http://flask-server:7000 -e AGENTS_API_URL=http://flask-server:7000 -e BASE_API_URL=http://host.docker.internal:8080 -e IS_MULTITENANT=false --add-host host.docker.internal:172.17.0.1 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
 
               "echo '--- Building and starting React UI (Frontend) - MATCHING docker-compose.yml ---'",
               "docker build -t react-ui:latest ./react-ui",
-              "docker run -d --name react-ui --network conductor-dev-net -p 3000:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=localhost:5000 -e REACT_APP_GQL_HTTP_PROTOCOL=http -e REACT_APP_GQL_WS_PROTOCOL=ws -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
+              "docker run -d --name react-ui --network conductor-dev-net -p 3000:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=localhost:5001 -e REACT_APP_GQL_HTTP_PROTOCOL=http -e REACT_APP_GQL_WS_PROTOCOL=ws -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
 
               "echo '--- Waiting for all services to stabilize ---'",
               "sleep 60",
@@ -98,9 +98,9 @@ jobs:
 
               "echo '--- DEPLOYMENT COMPLETED SUCCESSFULLY ---'",
               "echo 'Conductor Server: http://localhost:8080'",
-              "echo 'Conductor UI: http://localhost:5001'", 
+              "echo 'Conductor UI: http://localhost:5000'", 
               "echo 'Flask Server: http://localhost:7000'",
-              "echo 'GQL BFF: http://localhost:5000'",
+              "echo 'GQL BFF: http://localhost:5001'",
               "echo 'React UI: http://localhost:3000'"
             ]
           }
