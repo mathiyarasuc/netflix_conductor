@@ -48,7 +48,11 @@ jobs:
 
               "echo '--- Setting up repository for custom services ---'",
               "cd /home/ec2-user",
-              "if [ -d 'netflix_conductor' ]; then echo 'Repository exists, pulling latest changes...' && cd netflix_conductor && git pull origin main; else echo 'Repository not found, cloning...' && git clone https://github.com/mathiyarasuc/netflix_conductor.git && cd netflix_conductor; fi",
+              "echo 'Removing existing repository for fresh clone...'",
+              "rm -rf netflix_conductor || true",
+              "echo 'Cloning fresh repository...'",
+              "git clone https://github.com/mathiyarasuc/netflix_conductor.git",
+              "cd netflix_conductor",
 
               "echo '--- Starting Redis container (Primary DB + Queue) with VERIFIED Health Check ---'",
               "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always -v redis-data:/data --health-cmd='redis-cli ping || exit 1' --health-interval=30s --health-timeout=5s --health-retries=3 --health-start-period=10s redis:6.2-alpine redis-server --save 20 1 --loglevel warning",
@@ -78,11 +82,11 @@ jobs:
               "docker build -t flask-server:latest ./tool_executor",
               "docker run -d --name flask-server --network conductor-dev-net -p 7000:7000 -e FLASK_ENV=development --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:7000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=30s flask-server:latest",
 
-              "echo '--- Building and starting GQL BFF (GraphQL Backend) ---'",
+              "echo '--- Building and starting GQL BFF (GraphQL Backend) - MATCHING docker-compose.yml ---'",
               "docker build -t gql-bff:latest ./gql-bff",
               "docker run -d --name gql-bff --network conductor-dev-net -p 5000:5000 -e NODE_ENV=development -e PORT=5000 -e ELASTIC_SEARCH_HOST=http://elasticsearch:9200 -e ELASTIC_USER= -e ELASTIC_PASSWORD= -e ELASTIC_VERSION=7 -e ELASTIC_PREFIX=atlas -e APOLLO_LOGGING_LEVEL=ERROR -e TOOLS_API_URL=http://flask-server:7000 -e AGENTS_API_URL=http://flask-server:7000 -e BASE_API_URL=http://conductor-server:8080 -e IS_MULTITENANT=false --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
 
-              "echo '--- Building and starting React UI (Frontend) ---'",
+              "echo '--- Building and starting React UI (Frontend) - MATCHING docker-compose.yml ---'",
               "docker build -t react-ui:latest ./react-ui",
               "docker run -d --name react-ui --network conductor-dev-net -p 3000:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=localhost:5000 -e REACT_APP_GQL_HTTP_PROTOCOL=http -e REACT_APP_GQL_WS_PROTOCOL=ws -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
 
