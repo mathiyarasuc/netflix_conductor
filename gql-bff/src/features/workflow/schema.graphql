@@ -1,0 +1,24 @@
+extend type WorkflowDef {
+  readOnly: Boolean,
+  startHandlers: [EventHandler]
+}
+
+type ExportWorkflows {
+  data: String,
+  tenantCode: String
+}
+
+extend type Query {
+  getWorkflow(name: String!, version: Int!): WorkflowDef
+  getWorkflowList: [WorkflowDef]
+  exportWorkflows(workflowList: [String], prefix: String, allHandlers: Boolean): ExportWorkflows
+}
+
+extend input WorkflowTaskInput {
+    asyncHandler: String
+}
+
+extend type Mutation {
+  createOrUpdateWorkflow(input: WorkflowDefInput!): JSON
+  importWorkflows(input: String!, replacements: String!): String
+}

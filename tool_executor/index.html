@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Executor - Isolated Tool Execution System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tool-card {
+            border: 2px solid #e5e5e5;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: #fafafa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: left 0.6s;
+        }
+        
+        .tool-card:hover {
+            border-color: #667eea;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            background: #f8f9ff;
+        }
+        
+        .tool-card:hover::before {
+            left: 100%;
+        }
+        
+        .tool-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8edff 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.25);
+        }
+        
+        .tool-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tool-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .tool-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .execution-panel {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .form-group .field-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+        
+        .execute-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .execute-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .execute-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .results-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .execution-time {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        .json-viewer {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #c62828;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            margin: 15px 0;
+        }
+        
+        .badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        
+        .required {
+            color: #e53e3e;
+        }
+        
+        .nested-object {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .nested-header h4 {
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+            color: #667eea !important;
+        }
+        
+        .array-object {
+            background: rgba(76, 175, 80, 0.05);
+            border-radius: 10px;
+        }
+        
+        .array-header h4 {
+            color: #4caf50 !important;
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+        }
+        
+        .add-item-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .add-item-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .array-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .array-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .array-item h5 {
+            color: #333;
+            margin: 0 0 15px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .array-item button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+        
+        .array-item button:hover {
+            background: #d32f2f;
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .header p { font-size: 1.1em; }
+            .content { padding: 20px; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .execution-panel { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="status-indicator" id="statusIndicator">🔄 Connecting...</div>
+            <h1>🚀 Tool Executor</h1>
+            <p>Dynamic Isolated Tool Execution System</p>
+        </div>
+        
+        <div class="content">
+            <!-- Tools Selection Section -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🔧</span> Available Tools
+                    <span class="badge" id="toolCount">Loading...</span>
+                </div>
+                <div class="tools-grid" id="toolsGrid">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        Loading tools from database...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tool Execution Panel -->
+            <div class="execution-panel" id="executionPanel">
+                <div class="section-title">
+                    <span>⚡</span> Execute Tool: <span id="selectedToolName"></span>
+                </div>
+                
+                <div id="toolForm">
+                    <!-- Dynamic form will be generated here -->
+                </div>
+                
+                <button class="execute-btn" id="executeBtn" onclick="executeTool()">
+                    <span id="executeText">🚀 Execute Tool</span>
+                </button>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <div class="results-title">📊 Execution Results</div>
+                    <div class="execution-time" id="executionTime"></div>
+                </div>
+                <div class="json-viewer" id="jsonResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTool = null;
+        let toolDetails = null;
+        const API_BASE = 'http://localhost:7000';
+        
+        // Initialize the application
+        async function init() {
+            await loadTools();
+            updateStatus('✅ Connected', 'success');
+        }
+        
+        // Load all tools from the API
+        async function loadTools() {
+            try {
+                const response = await fetch(`${API_BASE}/tools`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayTools(data.tools);
+                    document.getElementById('toolCount').textContent = `${data.tools.length} tools`;
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error loading tools:', error);
+                document.getElementById('toolsGrid').innerHTML = `
+                    <div class="error">
+                        ❌ Failed to load tools: ${error.message}
+                    </div>
+                `;
+                updateStatus('❌ Connection Failed', 'error');
+            }
+        }
+        
+        // Display tools in the grid
+        function displayTools(tools) {
+            const grid = document.getElementById('toolsGrid');
+            grid.innerHTML = tools.map(tool => `
+                <div class="tool-card" onclick="selectTool('${tool}')">
+                    <div class="tool-name">
+                        🔧 ${tool}
+                    </div>
+                    <div class="tool-description">
+                        Click to load tool details and execute
+                    </div>
+                    <div class="tool-meta">
+                        <span>📋 Dynamic Schema</span>
+                        <span>🏗️ Isolated Execution</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Select a tool and load its details
+        async function selectTool(toolName) {
+            // Update UI selection
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            selectedTool = toolName;
+            document.getElementById('selectedToolName').textContent = toolName;
+            
+            // Show loading in execution panel
+            const executionPanel = document.getElementById('executionPanel');
+            executionPanel.style.display = 'block';
+            document.getElementById('toolForm').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Loading ${toolName} details and schema...
+                </div>
+            `;
+            
+            try {
+                // Load tool details
+                const response = await fetch(`${API_BASE}/tools/${toolName}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    toolDetails = data.tool_details;
+                    generateForm(toolDetails);
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Error loading tool details:', error);
+                document.getElementById('toolForm').innerHTML = `
+                    <div class="error">
+                        ❌ Failed to load tool details: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        // ADVANCED schema normalizer - handles wrapper objects without type declaration
+        function normalizeSchema(schema) {
+            const properties = schema.properties || {};
+            const required = schema.required || [];
+            
+            // Check if this looks like a wrapper object schema (common pattern)
+            const propertyKeys = Object.keys(properties);
+            
+            if (propertyKeys.length === 1) {
+                const wrapperKey = propertyKeys[0];
+                const wrapperValue = properties[wrapperKey];
+                
+                // If the single property contains nested properties but no type, it's likely a wrapper
+                if (wrapperValue && typeof wrapperValue === 'object' && 
+                    !wrapperValue.type && 
+                    Object.keys(wrapperValue).some(key => 
+                        typeof wrapperValue[key] === 'object' && 
+                        wrapperValue[key].type
+                    )) {
+                    
+                    console.log(`🔧 Detected wrapper object pattern: ${wrapperKey}`);
+                    
+                    // Flatten the wrapper - promote nested properties to top level
+                    return {
+                        type: "object",
+                        properties: wrapperValue,
+                        required: required,
+                        _wrapper_key: wrapperKey  // Remember for data reconstruction
+                    };
+                }
+            }
+            
+            return schema;
+        }
+        
+        // RECURSIVE schema parser for ANY level of nesting
+        function generateForm(details) {
+            const form = document.getElementById('toolForm');
+            let schema = details.input_schema || {};
+            
+            // NORMALIZE schema to handle wrapper patterns
+            schema = normalizeSchema(schema);
+            console.log('Normalized schema:', schema);
+            
+            const properties = schema.properties || {};
+            const required = schema.required || [];
+            
+            if (Object.keys(properties).length === 0) {
+                form.innerHTML = `
+                    <div class="success">
+                        ✅ This tool requires no input parameters
+                    </div>
+                `;
+                return;
+            }
+            
+            // Store normalized schema for data collection
+            window.normalizedSchema = schema;
+            
+            const formHTML = generateFieldsRecursive(properties, required, '');
+            form.innerHTML = formHTML;
+        }
+        
+        // RECURSIVE function to handle nested schemas at ANY depth
+        function generateFieldsRecursive(properties, required = [], pathPrefix = '', level = 0) {
+            const indent = level * 20; // Indentation for nested levels
+            
+            return Object.entries(properties).map(([fieldName, fieldSchema]) => {
+                const fullPath = pathPrefix ? `${pathPrefix}.${fieldName}` : fieldName;
+                const isRequired = required.includes(fieldName);
+                const fieldType = fieldSchema.type || 'string';
+                const description = fieldSchema.description || '';
+                const defaultValue = fieldSchema.default;
+                
+                let fieldHTML = '';
+                
+                switch (fieldType) {
+                    case 'object':
+                        // NESTED OBJECT - recursively generate fields
+                        const nestedProperties = fieldSchema.properties || {};
+                        const nestedRequired = fieldSchema.required || [];
+                        
+                        if (Object.keys(nestedProperties).length > 0) {
+                            const nestedFields = generateFieldsRecursive(
+                                nestedProperties, 
+                                nestedRequired, 
+                                fullPath, 
+                                level + 1
+                            );
+                            
+                            fieldHTML = `
+                                <div class="nested-object" style="margin-left: ${indent}px; border-left: 3px solid #e0e0e0; padding-left: 15px; margin-bottom: 20px;">
+                                    <div class="nested-header">
+                                        <h4 style="color: #667eea; margin-bottom: 10px;">
+                                            📦 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                        </h4>
+                                        ${description ? `<div class="field-description" style="margin-bottom: 15px;">${description}</div>` : ''}
+                                    </div>
+                                    ${nestedFields}
+                                </div>
+                            `;
+                        } else {
+                            // Empty object - JSON input
+                            fieldHTML = `
+                                <div class="form-group" style="margin-left: ${indent}px;">
+                                    <label for="${fullPath}">
+                                        📦 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                    </label>
+                                    ${description ? `<div class="field-description">${description}</div>` : ''}
+                                    <textarea id="${fullPath}" name="${fullPath}" 
+                                        placeholder="Enter JSON object: {}" rows="3"></textarea>
+                                </div>
+                            `;
+                        }
+                        break;
+                    
+                    case 'array':
+                        if (fieldSchema.items && fieldSchema.items.type === 'object' && fieldSchema.items.properties) {
+                            // ARRAY OF OBJECTS - show array manager
+                            const itemProperties = fieldSchema.items.properties;
+                            const itemRequired = fieldSchema.items.required || [];
+                            
+                            fieldHTML = `
+                                <div class="array-object" style="margin-left: ${indent}px; border: 2px dashed #e0e0e0; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                    <div class="array-header">
+                                        <h4 style="color: #667eea; margin-bottom: 10px;">
+                                            📋 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''} (Array)
+                                        </h4>
+                                        ${description ? `<div class="field-description" style="margin-bottom: 15px;">${description}</div>` : ''}
+                                        <button type="button" class="add-item-btn" onclick="addArrayItem('${fullPath}', '${JSON.stringify(itemProperties).replace(/'/g, "\\'")}', '${JSON.stringify(itemRequired).replace(/'/g, "\\'")}', ${level + 1})" 
+                                                style="background: #4caf50; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 10px;">
+                                            ➕ Add Item
+                                        </button>
+                                    </div>
+                                    <div id="${fullPath}-items" class="array-items">
+                                        <!-- Array items will be added here -->
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            // SIMPLE ARRAY - comma-separated values
+                            fieldHTML = `
+                                <div class="form-group" style="margin-left: ${indent}px;">
+                                    <label for="${fullPath}">
+                                        📋 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''} (Array)
+                                    </label>
+                                    ${description ? `<div class="field-description">${description}</div>` : ''}
+                                    <textarea id="${fullPath}" name="${fullPath}" 
+                                        placeholder="Enter values separated by commas" rows="3"></textarea>
+                                </div>
+                            `;
+                        }
+                        break;
+                    
+                    case 'string':
+                        if (fieldSchema.enum) {
+                            // ENUM DROPDOWN
+                            const options = fieldSchema.enum.map(value => 
+                                `<option value="${value}" ${value === defaultValue ? 'selected' : ''}>${value}</option>`
+                            ).join('');
+                            fieldHTML = `
+                                <div class="form-group" style="margin-left: ${indent}px;">
+                                    <label for="${fullPath}">
+                                        📝 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                    </label>
+                                    ${description ? `<div class="field-description">${description}</div>` : ''}
+                                    <select id="${fullPath}" name="${fullPath}">${options}</select>
+                                </div>
+                            `;
+                        } else {
+                            // TEXT INPUT
+                            fieldHTML = `
+                                <div class="form-group" style="margin-left: ${indent}px;">
+                                    <label for="${fullPath}">
+                                        📝 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                    </label>
+                                    ${description ? `<div class="field-description">${description}</div>` : ''}
+                                    <input type="text" id="${fullPath}" name="${fullPath}" 
+                                        value="${defaultValue || ''}" 
+                                        ${fieldSchema.pattern ? `pattern="${fieldSchema.pattern}"` : ''}
+                                        placeholder="${fieldSchema.examples ? fieldSchema.examples[0] : ''}">
+                                </div>
+                            `;
+                        }
+                        break;
+                    
+                    case 'integer':
+                    case 'number':
+                        fieldHTML = `
+                            <div class="form-group" style="margin-left: ${indent}px;">
+                                <label for="${fullPath}">
+                                    🔢 ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                </label>
+                                ${description ? `<div class="field-description">${description}</div>` : ''}
+                                <input type="number" id="${fullPath}" name="${fullPath}" 
+                                    value="${defaultValue || ''}"
+                                    ${fieldSchema.minimum !== undefined ? `min="${fieldSchema.minimum}"` : ''}
+                                    ${fieldSchema.maximum !== undefined ? `max="${fieldSchema.maximum}"` : ''}
+                                    step="${fieldType === 'integer' ? '1' : 'any'}">
+                            </div>
+                        `;
+                        break;
+                    
+                    case 'boolean':
+                        fieldHTML = `
+                            <div class="form-group" style="margin-left: ${indent}px;">
+                                <label>
+                                    ☑️ ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                </label>
+                                ${description ? `<div class="field-description">${description}</div>` : ''}
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="${fullPath}" name="${fullPath}" 
+                                        ${defaultValue ? 'checked' : ''}>
+                                    <label for="${fullPath}">Enable</label>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    
+                    default:
+                        fieldHTML = `
+                            <div class="form-group" style="margin-left: ${indent}px;">
+                                <label for="${fullPath}">
+                                    ❓ ${fieldName} ${isRequired ? '<span class="required">*</span>' : ''}
+                                </label>
+                                ${description ? `<div class="field-description">${description}</div>` : ''}
+                                <input type="text" id="${fullPath}" name="${fullPath}" value="${defaultValue || ''}">
+                            </div>
+                        `;
+                }
+                
+                return fieldHTML;
+            }).join('');
+        }
+        
+        // Add item to array of objects
+        function addArrayItem(arrayPath, itemPropertiesJson, itemRequiredJson, level) {
+            const itemProperties = JSON.parse(itemPropertiesJson);
+            const itemRequired = JSON.parse(itemRequiredJson);
+            const itemsContainer = document.getElementById(`${arrayPath}-items`);
+            const itemIndex = itemsContainer.children.length;
+            const itemPath = `${arrayPath}[${itemIndex}]`;
+            
+            const itemFields = generateFieldsRecursive(itemProperties, itemRequired, itemPath, level);
+            
+            const itemHTML = `
+                <div class="array-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 8px; background: #f9f9f9;">
+                    <div style="display: flex; justify-content: between-between; align-items: center; margin-bottom: 10px;">
+                        <h5 style="color: #333; margin: 0;">Item ${itemIndex + 1}</h5>
+                        <button type="button" onclick="removeArrayItem(this)" 
+                                style="background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                            🗑️ Remove
+                        </button>
+                    </div>
+                    ${itemFields}
+                </div>
+            `;
+            
+            itemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+        }
+        
+        // ADVANCED data collection - handles wrapper reconstruction
+        function collectFormDataAdvanced() {
+            const schema = window.normalizedSchema || {};
+            const wrapperKey = schema._wrapper_key;
+            
+            // Collect data using recursive method
+            const collectedData = collectFormDataRecursive(schema);
+            
+            // If there was a wrapper, reconstruct it
+            if (wrapperKey && Object.keys(collectedData).length > 0) {
+                console.log(`🔄 Reconstructing wrapper object: ${wrapperKey}`);
+                return {
+                    [wrapperKey]: collectedData
+                };
+            }
+            
+            return collectedData;
+        }
+        
+        // RECURSIVE data collection for ANY level of nesting
+        function collectFormDataRecursive(schema, pathPrefix = '') {
+            const properties = schema.properties || {};
+            const result = {};
+            
+            Object.keys(properties).forEach(fieldName => {
+                const fieldSchema = properties[fieldName];
+                const fieldType = fieldSchema.type || 'string';
+                const fullPath = pathPrefix ? `${pathPrefix}.${fieldName}` : fieldName;
+                
+                switch (fieldType) {
+                    case 'object':
+                        if (fieldSchema.properties && Object.keys(fieldSchema.properties).length > 0) {
+                            // NESTED OBJECT - collect recursively
+                            const nestedData = collectFormDataRecursive(fieldSchema, fullPath);
+                            if (Object.keys(nestedData).length > 0) {
+                                result[fieldName] = nestedData;
+                            }
+                        } else {
+                            // SIMPLE OBJECT - JSON input
+                            const field = document.getElementById(fullPath);
+                            if (field && field.value.trim()) {
+                                try {
+                                    result[fieldName] = JSON.parse(field.value);
+                                } catch (e) {
+                                    console.warn(`Invalid JSON for ${fieldName}:`, field.value);
+                                }
+                            }
+                        }
+                        break;
+                    
+                    case 'array':
+                        if (fieldSchema.items && fieldSchema.items.type === 'object' && fieldSchema.items.properties) {
+                            // ARRAY OF OBJECTS - collect from all array items
+                            const itemsContainer = document.getElementById(`${fullPath}-items`);
+                            const arrayData = [];
+                            
+                            if (itemsContainer) {
+                                const arrayItems = itemsContainer.querySelectorAll('.array-item');
+                                arrayItems.forEach((item, index) => {
+                                    const itemPath = `${fullPath}[${index}]`;
+                                    const itemData = collectFormDataRecursive(fieldSchema.items, itemPath);
+                                    if (Object.keys(itemData).length > 0) {
+                                        arrayData.push(itemData);
+                                    }
+                                });
+                            }
+                            
+                            if (arrayData.length > 0) {
+                                result[fieldName] = arrayData;
+                            }
+                        } else {
+                            // SIMPLE ARRAY - comma-separated values
+                            const field = document.getElementById(fullPath);
+                            if (field && field.value.trim()) {
+                                const arrayValue = field.value.split(',').map(v => v.trim()).filter(v => v);
+                                if (arrayValue.length > 0) {
+                                    result[fieldName] = arrayValue;
+                                }
+                            }
+                        }
+                        break;
+                    
+                    default:
+                        // SIMPLE FIELD - string, number, boolean
+                        const field = document.getElementById(fullPath);
+                        if (field) {
+                            let value = field.type === 'checkbox' ? field.checked : field.value;
+                            
+                            // Convert based on schema type
+                            switch (fieldType) {
+                                case 'integer':
+                                    if (value !== '') value = parseInt(value) || 0;
+                                    break;
+                                case 'number':
+                                    if (value !== '') value = parseFloat(value) || 0;  
+                                    break;
+                                case 'boolean':
+                                    // value is already boolean from checkbox
+                                    break;
+                            }
+                            
+                            // Only include non-empty values
+                            if (value !== '' && value !== null && value !== undefined) {
+                                result[fieldName] = value;
+                            }
+                        }
+                        break;
+                }
+            });
+            
+            return result;
+        }
+        
+        // Remove array item
+        function removeArrayItem(button) {
+            button.closest('.array-item').remove();
+        }
+        
+        // Execute the selected tool
+        async function executeTool() {
+            if (!selectedTool || !toolDetails) {
+                alert('Please select a tool first');
+                return;
+            }
+            
+            // Disable button and show loading
+            const executeBtn = document.getElementById('executeBtn');
+            const executeText = document.getElementById('executeText');
+            executeBtn.disabled = true;
+            executeText.innerHTML = '<div class="spinner" style="width: 16px; height: 16px;"></div> Executing...';
+            
+            // Hide previous results
+            document.getElementById('resultsSection').style.display = 'none';
+            
+            try {
+                // ADVANCED data collection with wrapper reconstruction
+                const formData = collectFormDataAdvanced();
+                
+                console.log('Collected advanced form data:', formData);
+                
+                console.log('Sending data:', formData);
+                
+                // Execute tool
+                const startTime = Date.now();
+                const response = await fetch(`${API_BASE}/tools/${selectedTool}/execute`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                const executionTime = ((Date.now() - startTime) / 1000).toFixed(2);
+                
+                // Display results
+                displayResults(result, executionTime);
+                
+            } catch (error) {
+                console.error('Execution error:', error);
+                displayResults({
+                    status: 'error',
+                    message: `Execution failed: ${error.message}`
+                }, '0');
+            } finally {
+                // Re-enable button
+                executeBtn.disabled = false;
+                executeText.innerHTML = '🚀 Execute Tool';
+            }
+        }
+        
+        // Display execution results
+        function displayResults(result, executionTime) {
+            const resultsSection = document.getElementById('resultsSection');
+            const jsonResults = document.getElementById('jsonResults');
+            const executionTimeEl = document.getElementById('executionTime');
+            
+            // Update execution time
+            executionTimeEl.textContent = `⏱️ ${executionTime}s`;
+            
+            // Format and display JSON
+            jsonResults.textContent = JSON.stringify(result, null, 2);
+            
+            // Show results section
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Update status indicator
+        function updateStatus(text, type) {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.textContent = text;
+            indicator.className = `status-indicator ${type}`;
+        }
+        
+        // Initialize the app when page loads
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

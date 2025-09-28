@@ -1,0 +1,43 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node src/index.js",
+    "start:production": "cross-env NODE_ENV=production node src/index.js"
+  },
+  "dependencies": {
+    "es6": "npm:@elastic/elasticsearch@^6.8.8",
+    "es8": "npm:@elastic/elasticsearch@^8.6.0",
+    "@graphql-mesh/cli": "^0.29.12",
+    "@graphql-mesh/openapi": "0.16.9",
+    "@koa/cors": "^3.1.0",
+    "@totalsoft/key-per-file-configuration": "1.0.0",
+    "@totalsoft/tenant-configuration": "1.0.0",
+    "apollo-datasource-rest": "^3.4.0",
+    "apollo-server": "^2.24.1",
+    "apollo-server-koa": "^2.24.1",
+    "colors": "^1.4.0",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.5.0",
+    "humps": "^2.0.1",
+    "i": "^0.3.6",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^3.0.1",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-graphql": "^0.8.0",
+    "koa-ignore": "^1.0.1",
+    "koa-jwt": "^4.0.1",
+    "koa-mount": "^4.0.0",
+    "lodash.merge": "^4.6.2",
+    "node-fetch": "^2.6.1",
+    "npm": "^7.12.1",
+    "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "jest": "^27.5.1"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

@@ -1,0 +1,30 @@
+{{- $current := .Values.gql -}}
+{{- $global := .Values.global -}}
+{{- if $current.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "Gql.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "Gql.fullname" . }}
+    helm.sh/chart: {{ include "Gql.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- if $global.gateway.enabled }}
+    api-gateway/oidc.audience: {{ include "Gql.fullname" . }}
+    api-gateway/resource: {{ include "Gql.fullname" . }}
+    api-gateway/secured: "false"
+    {{- end }}
+spec:
+  type: {{ $current.service.type }}
+  ports:
+    - port: {{ $current.service.port }}
+      protocol: TCP
+      targetPort: {{ $current.service.targetPort }}
+      name: http
+      {{- if $current.service.nodePort }}
+      nodePort: {{ $current.service.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "Gql.selectorLabels" . | nindent 4 }}
+{{- end -}}

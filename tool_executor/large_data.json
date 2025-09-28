@@ -1,0 +1,4191 @@
+{
+  "case_id": "SUB0010063",
+  "submission_data": {
+    "Common": {
+      "Firmographics": {
+        "company_name": {
+          "value": "Braden Business Systems, Inc.",
+          "score": "96.22"
+        },
+        "address_1": {
+          "value": "8700 North St",
+          "score": "94.79"
+        },
+        "address_2": {
+          "value": "Suite 400",
+          "score": "94.79"
+        },
+        "city": {
+          "value": "FISHERS",
+          "score": "94.79"
+        },
+        "state": {
+          "value": "IN",
+          "score": "94.79"
+        },
+        "website": {
+          "value": "http://www.bradenonline.com/",
+          "score": "95.27"
+        },
+        "quote_target_date": {
+          "value": "",
+          "score": ""
+        },
+        "primary_sic": [
+          {
+            "sic_code": "5999",
+            "sic_desc": "Ret misc merchandise"
+          }
+        ],
+        "primary_naics_2017": [
+          {
+            "naics_code": "541512",
+            "naics_desc": "Computer Systems Design Services"
+          }
+        ],
+        "vehicles": [
+          {
+            "make": "Ford",
+            "model": "F150",
+            "year": "2020",
+            "vehicle_type": "",
+            "vin": "1FTEW1EP3LKF45845"
+          },
+          {
+            "make": "Audi",
+            "model": "S4",
+            "year": "2019",
+            "vehicle_type": "",
+            "vin": "WAUB4AF48KA112195"
+          },
+          {
+            "make": "ISU",
+            "model": "NPR",
+            "year": "2014",
+            "vehicle_type": "",
+            "vin": "54DC4W1B2ESB00066"
+          },
+          {
+            "make": "Nissan",
+            "model": "NV 1500",
+            "year": "2014",
+            "vehicle_type": "",
+            "vin": "1N6BF0KL9EN111152"
+          },
+          {
+            "make": "Honda",
+            "model": "Civic",
+            "year": "2016",
+            "vehicle_type": "",
+            "vin": "19XFC1F92GE014674"
+          },
+          {
+            "make": "Nissan",
+            "model": "NV",
+            "year": "2012",
+            "vehicle_type": "",
+            "vin": "1N6AF0LY2CN106619"
+          },
+          {
+            "make": "Volvo",
+            "model": "S60",
+            "year": "2012",
+            "vehicle_type": "",
+            "vin": "YV1622FS5C2101241"
+          },
+          {
+            "make": "Isuzu",
+            "model": "NPR HD",
+            "year": "2018",
+            "vehicle_type": "",
+            "vin": "54DC4W1B1JS809182"
+          },
+          {
+            "make": "Toyota",
+            "model": "Corolla LE",
+            "year": "2017",
+            "vehicle_type": "",
+            "vin": "5YFBURHE9HP689314"
+          },
+          {
+            "make": "Toyota",
+            "model": "Corolla LE",
+            "year": "2017",
+            "vehicle_type": "",
+            "vin": "5YFBURHE8HP708631"
+          },
+          {
+            "make": "Toyota",
+            "model": "Corolla LE",
+            "year": "2017",
+            "vehicle_type": "",
+            "vin": "5YFBURHE0HP697821"
+          },
+          {
+            "make": "Toyota",
+            "model": "Corolla LE",
+            "year": "2017",
+            "vehicle_type": "",
+            "vin": "5YFBURHE5HP699712"
+          },
+          {
+            "make": "Isuzu",
+            "model": "NPR",
+            "year": "2019",
+            "vehicle_type": "",
+            "vin": "54DB4W1B0KS807086"
+          },
+          {
+            "make": "Mercedes",
+            "model": "C300",
+            "year": "2023",
+            "vehicle_type": "",
+            "vin": "W1KAF4HB6PR100289"
+          }
+        ],
+        "employees": [
+          {
+            "class_code": "5191",
+            "class_description": "Office Machine Installation Inspection - Adjustment or repair",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "2",
+            "state": "IL",
+            "employee_category": "Office Machine Installation Inspection - Adjustment or repair",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "165,500.00",
+            "premium_rate": "1.62000",
+            "estimated_annual_premium": "2,681.00",
+            "location_text": "951 Cambridge Drive,Elk Grove Village,IL,60007"
+          },
+          {
+            "class_code": "8742",
+            "class_description": "Salespersons Outside",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "2",
+            "state": "IL",
+            "employee_category": "Salespersons Outside",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "288,900.00",
+            "premium_rate": "0.34000",
+            "estimated_annual_premium": "982.00",
+            "location_text": "951 Cambridge Drive,Elk Grove Village,IL,60007"
+          },
+          {
+            "class_code": "8810",
+            "class_description": "Clerical Office Employees NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "2",
+            "state": "IL",
+            "employee_category": "Clerical Office Employees NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "210,400.00",
+            "premium_rate": "0.15000",
+            "estimated_annual_premium": "316.00",
+            "location_text": "951 Cambridge Drive,Elk Grove Village,IL,60007"
+          },
+          {
+            "class_code": "5191",
+            "class_description": "Office machine installation inspection - adjustment or repair",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Office machine installation inspection - adjustment or repair",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "638,600.00",
+            "premium_rate": "0.87000",
+            "estimated_annual_premium": "5,556.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "7380",
+            "class_description": "Chauffeurs NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Chauffeurs NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "24,600.00",
+            "premium_rate": "3.45000",
+            "estimated_annual_premium": "849.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8742",
+            "class_description": "Salespersons outside",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Salespersons outside",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "739,500.00",
+            "premium_rate": "0.20000",
+            "estimated_annual_premium": "1,479.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8810",
+            "class_description": "Clerical office employees NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Clerical office employees NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "2,398,400.00",
+            "premium_rate": "0.15000",
+            "estimated_annual_premium": "3,598.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8803",
+            "class_description": "Auditors - Traveling",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Auditors - Traveling",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "192,100.00",
+            "premium_rate": "0.07000",
+            "estimated_annual_premium": "134.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8018",
+            "class_description": "Store: Wholesale NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "1",
+            "state": "IN",
+            "employee_category": "Store: Wholesale NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "109,000.00",
+            "premium_rate": "2.52000",
+            "estimated_annual_premium": "2,747.00",
+            "location_text": "8700 North Street,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8810",
+            "class_description": "Clerical office employees NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "3",
+            "state": "IN",
+            "employee_category": "Clerical office employees NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "1,800.00",
+            "premium_rate": "0.15000",
+            "estimated_annual_premium": "3.00",
+            "location_text": "11815 Technology Lane,Fishers,IN,46038"
+          },
+          {
+            "class_code": "8742",
+            "class_description": "Salesperson Outside",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "4",
+            "state": "IN",
+            "employee_category": "Salesperson Outside",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "0.00",
+            "premium_rate": "0.20000",
+            "estimated_annual_premium": "0.00",
+            "location_text": ""
+          },
+          {
+            "class_code": "8810",
+            "class_description": "Clerical Office Employees NOC",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "4",
+            "state": "IN",
+            "employee_category": "Clerical Office Employees NOC",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "0.00",
+            "premium_rate": "0.15000",
+            "estimated_annual_premium": "0.00",
+            "location_text": ""
+          },
+          {
+            "class_code": "5191",
+            "class_description": "Office Machine Installation",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "4",
+            "state": "IN",
+            "employee_category": "Office Machine Installation",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "0.00",
+            "premium_rate": "0.87000",
+            "estimated_annual_premium": "0.00",
+            "location_text": ""
+          },
+          {
+            "class_code": "",
+            "class_description": "",
+            "total_full_time_employees": "",
+            "total_part_time_employees": "",
+            "location_id": "4",
+            "state": "",
+            "employee_category": "",
+            "employee_category_sic_code": "",
+            "employee_category_naics_code": "",
+            "estimated_annual_remuneration": "",
+            "premium_rate": "",
+            "estimated_annual_premium": "",
+            "location_text": "310 Farabee Drive IN Lafayette, IN 47905"
+          }
+        ],
+        "annual_revenue": {
+          "value": "14,037,846.00",
+          "score": "69.90"
+        },
+        "postal_code": {
+          "value": "46038",
+          "score": "94.79"
+        },
+        "annual_payroll": {
+          "value": "5,063,686.89",
+          "score": "85.16"
+        },
+        "total_full_time_employees": {
+          "value": "47",
+          "score": "80.64"
+        },
+        "total_part_time_employees": {
+          "value": "",
+          "score": ""
+        },
+        "total_number_of_locations": {
+          "value": "",
+          "score": ""
+        },
+        "auto": {
+          "total_power_units": {
+            "value": "14",
+            "score": "85.16"
+          }
+        },
+        "year_in_business": {
+          "value": "36",
+          "score": "80.64"
+        },
+        "existing_insurance": []
+      },
+      "Broker_Details": {
+        "broker_name": {
+          "value": "thegibsonedge.com",
+          "score": "78.19"
+        },
+        "broker_address": {
+          "value": "202 South Michigan St., Suite 1400",
+          "score": "75.59"
+        },
+        "broker_city": {
+          "value": "South Bend",
+          "score": "75.59"
+        },
+        "broker_state": {
+          "value": "IN",
+          "score": "75.59"
+        },
+        "broker_postal_code": {
+          "value": "46601",
+          "score": "75.59"
+        },
+        "broker_contact_points": {
+          "value": "Li",
+          "score": "78.19"
+        },
+        "broker_email": {
+          "value": "lm@thegibsonedge.com",
+          "score": "78.19"
+        },
+        "broker_contact_phone": {
+          "value": "3194593008",
+          "score": "80.64"
+        },
+        "submission_received_date": {
+          "value": "",
+          "score": ""
+        }
+      },
+      "Product_Details": {
+        "normalized_product": [
+          "Workers Compensation",
+          "Property Insurance",
+          "Umbrella",
+          "General Liability",
+          "Commercial Auto"
+        ],
+        "policy_inception_date": {
+          "value": "2025-10-17",
+          "score": "85.16"
+        },
+        "end_date": {
+          "value": "",
+          "score": ""
+        },
+        "submission_received_date": {
+          "value": "",
+          "score": ""
+        },
+        "target_premium": {
+          "value": "11,979.00",
+          "score": "80.64"
+        },
+        "underwriter": {
+          "value": "",
+          "score": ""
+        },
+        "underwriter_email": {
+          "value": "",
+          "score": ""
+        },
+        "workers_comp_estimated_annual_payroll": {
+          "value": "4,768,800.00",
+          "score": "85.16"
+        },
+        "document_date": {
+          "value": "2023-06-20",
+          "score": "69.90"
+        },
+        "expiring_premium": {
+          "value": "",
+          "score": ""
+        },
+        "lob": {
+          "value": "Property & Casualty",
+          "score": ""
+        }
+      },
+      "Limits_and_Coverages": {
+        "100_pct_limit": {
+          "GENERAL AGGREGATE": {
+            "value": "2,000,000.00",
+            "score": ""
+          },
+          "PRODUCTS & COMPLETED OPERATIONS AGGREGATE": {
+            "value": "2,000,000.00",
+            "score": ""
+          },
+          "PERSONAL & ADVERTISING INJURY": {
+            "value": "2,000,000.00",
+            "score": ""
+          },
+          "EACH OCCURRENCE": {
+            "value": "1,000,000.00",
+            "score": ""
+          },
+          "DAMAGE TO RENTED PREMISES (each occurrence)": {
+            "value": "300,000.00",
+            "score": ""
+          },
+          "MEDICAL EXPENSE (Any one person)": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "EMPLOYEE BENEFITS": {
+            "value": "1,000,000.00",
+            "score": ""
+          },
+          "EA OCC": {
+            "value": "10,000,000.00",
+            "score": ""
+          },
+          "Employers Liability - DISEASE-POLICY LIMIT": {
+            "value": "500,000.00",
+            "score": ""
+          },
+          "Appurtenant Structures - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Business Income from Dependent Properties - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Business Personal Property Temporariliy in Portable Storage Units - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Business Personal Property Temporariliy in Portable Storage Units - LIMIT 2": {
+            "value": "500.00",
+            "score": ""
+          },
+          "Commercial Tools and Small Equipment - Any One Tool - LIMIT 1": {
+            "value": "2,500.00",
+            "score": ""
+          },
+          "Commercial Tools and Small Equipment - Any Small Piece of Equip - LIMIT 1": {
+            "value": "2,500.00",
+            "score": ""
+          },
+          "Commercial Tools and Small Equipment Per Occurrence - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Commercial Tools and Small Equipment - Toolbox - LIMIT 1": {
+            "value": "2,500.00",
+            "score": ""
+          },
+          "Computer Funds Transfer Fraud - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Debris Removal - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Deferred Payments - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Electronic Vandalism - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Electronic Vandalism - LIMIT 2": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Employee Theft including ERISA Compliance - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Employee Theft including ERISA Compliance - LIMIT 2": {
+            "value": "1,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Data Restoration - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Expediting Expenses - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Fungi, Wet Rot or Dry Rot - LIMIT 1": {
+            "value": "15,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Hazardous Substances - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Property Off Premise - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Public Relations - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Equipment Breakdown Spoilage - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Fine Arts - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Fire Dept Service Charge - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Fire Protection Equipment Recharge - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Forgery or Alteration - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Fur & Fur Garments - Theft - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Installation Floater - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Interruption of Computer Operations - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Inventory and Loss Appraisal - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Jewelry & Precious Metal - Theft - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Key Replacement / Lock Repair - LIMIT 1": {
+            "value": "1,000.00",
+            "score": ""
+          },
+          "Leasehold Interest (Tenants Only) - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Limited Coverage for Fungi, Wet Rot or Dry Rot - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Money Orders and Counterfeit Money - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Newly Acquired or Constructed Property - Buildings - LIMIT 1": {
+            "value": "1,000,000.00",
+            "score": ""
+          },
+          "Newly Acquired or Constructed Property - Business Income and Extra Expense - LIMIT 1": {
+            "value": "250,000.00",
+            "score": ""
+          },
+          "Newly Acquired or Constructed Property - Personal Property - LIMIT 1": {
+            "value": "500,000.00",
+            "score": ""
+          },
+          "Outdoor Property Specified COL - Per Occ $1k for any one tree / shrub / plant - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Paved Surfaces - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Personal Effects - LIMIT 1": {
+            "value": "75,000.00",
+            "score": ""
+          },
+          "Personal Property in Transit - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Personal Property Off Premises - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Pollutant Cleanup and Removal - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Rewards - Arson, Theft and Vandalism - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Salesperson Representative Samples - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Tenant Building Coverage - Required by Lease - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Tenant Building Personal Property Coverage Required by Lease - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Tenant Signs - LIMIT 1": {
+            "value": "20,000.00",
+            "score": ""
+          },
+          "Theft of Telephonic Services - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Unauthorized Business Credit Card Use - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Utility Services Business Income & Extra Expense - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Utility Services Direct Damage - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Advertising Expense to Regain Customers - LIMIT 1": {
+            "value": "2,500.00",
+            "score": ""
+          },
+          "Business Income and Extra Expense - Contingent Transit - LIMIT 1": {
+            "value": "100,000.00",
+            "score": ""
+          },
+          "Business Income and Extra Expense - Dependent Properties - LIMIT 1": {
+            "value": "100,000.00",
+            "score": ""
+          },
+          "Business Income and Extra Expense Transit - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Business Income and Extra Expense - Websites - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Computer and Funds Transfer Fraud - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Contract Penalties - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Expediting Expenses - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Hired Auto - Physical Damage - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "International Air Shipments - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Interruption of Computer Operations - On & Off Premises - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Inventory & Loss Appraisal - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Key Replacement and Lock Repair - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Lessor's Lease Cancellation - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Moneys and Securities - Outside the Premises - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Newly Acquired Constructed Property - Business Income and Extra Expense - LIMIT 1": {
+            "value": "500,000.00",
+            "score": ""
+          },
+          "Ordiance or Law - Demolition Cost and Increased Cost of Construction - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Ordiance or Law Increase Period of Restoration - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Ordiance or Law Tenants Improvement Extension - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Outdoor Property - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Portable Electronic Devises Coverage Worldwide - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Precious Metal Theft Payment Changes - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Preservation of Property Expense - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Sales Representative Samples - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Soft Cost - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Spoilage - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Temporary Relocation of Property - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Tenant Relocation - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Tenant Signs - LIMIT 2": {
+            "value": "500.00",
+            "score": ""
+          },
+          "Underground Water Seepage - LIMIT 1": {
+            "value": "100,000.00",
+            "score": ""
+          },
+          "Utility Services - Direct Damage (Excludes overhead trans lines) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Utility Services Time Element (Excludes overhead trans lines) - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Worldwide Property Off-Premises - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Accounts Receivable on premises - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Computer Equipment - LIMIT 1": {
+            "value": "35,000.00",
+            "score": ""
+          },
+          "Computer Equipment Extra Expense - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Money & Securities (On Premises / Off Premises) - LIMIT 1": {
+            "value": "10,000.00",
+            "score": ""
+          },
+          "Money & Securities (On Premises / Off Premises) - LIMIT 2": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Ordinance or Law Cov B&C - Demo Cost, Increased Cost of Construction - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Utility Services - Direct Damage (Excl Overhead Trans Lines) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Utility Services Time Element (Excl Overhead Trans Lines) - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Valuable Papers and Records (Other than Electronic Data) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Ordinance or Law Coverage B&C - Demo Cost, Increased Cost of Construction - LIMIT 1": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "Utility Services Direct Damage (Excld Overhead Trans Lines) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Accounts Receivable (On Premises) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Compter Equipment - LIMIT 1": {
+            "value": "35,000.00",
+            "score": ""
+          },
+          "Utility Services Direct Damage (Exic Overhead Trans Lines) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Utility Services Time Element (ExIc Overhead Trans Lines) - LIMIT 1": {
+            "value": "50,000.00",
+            "score": ""
+          },
+          "Valuable Papers and Records (Other Than Electronic Data) - LIMIT 1": {
+            "value": "25,000.00",
+            "score": ""
+          },
+          "Employee Benefits Liability - LIMIT 1": {
+            "value": "1,000,000.00",
+            "score": ""
+          },
+          "Employee Benefits Liability - LIMIT 2": {
+            "value": "3,000,000.00",
+            "score": ""
+          },
+          "BUSINESS AUTO - MEDICAL PAYMENTS EACH PERSON": {
+            "value": "5,000.00",
+            "score": ""
+          },
+          "BUSINESS AUTO - UNINSURED MOTORIST CSL / BI EA PER": {
+            "value": "1,000,000.00",
+            "score": ""
+          },
+          "MOTOR CARRIER - UNINSURED MOTORIST CSL / BI EA PER": {
+            "value": "64.00",
+            "score": ""
+          }
+        },
+        "normalized_coverage": [
+          "General Liability",
+          "Product Liability",
+          "Completed operations",
+          "Personal Injury Protection",
+          "Building",
+          "Medical Payment",
+          "AOP",
+          "Employers Liability",
+          "Liquor Liability",
+          "Hired and Non-Owned Auto Coverage",
+          "Business Interruption",
+          "Contents",
+          "Property Damage",
+          "Business Personal Property",
+          "Tools & Equipment",
+          "Fiduciary Liability",
+          "Debris Removal",
+          "Fidelity and Crime",
+          "Equipment Breakdown",
+          "Network Security",
+          "Extended Products",
+          "Fine Arts",
+          "Claims Expense",
+          "Builder’s Risk",
+          "Surety Bond",
+          "Pollutant and Contaminant Cleanup",
+          "Care, Custody and Control",
+          "Fidelity Bonds",
+          "Theft",
+          "Under Insured Motorist",
+          "Utility Service",
+          "Terrorism",
+          "Uninsured Motorist",
+          "Money at the Cash Counter",
+          "Ordinance or Law A",
+          "All Risk",
+          "Computer Equipment",
+          "Collision",
+          "Money on the Premises",
+          "Network Business Interruption",
+          "GAP Coverage"
+        ],
+        "coverage": [
+          "GENERAL AGGREGATE",
+          "PRODUCTS & COMPLETED OPERATIONS AGGREGATE",
+          "PERSONAL & ADVERTISING INJURY",
+          "EACH OCCURRENCE",
+          "DAMAGE TO RENTED PREMISES (each occurrence)",
+          "MEDICAL EXPENSE (Any one person)",
+          "EMPLOYEE BENEFITS",
+          "LIQUOR LIABILITY",
+          "HIRED NON OWNED LIABILITY",
+          "EPLI EACH CLAIM",
+          "BLANKET BUILDING LIMITS",
+          "BLANKET CONTENTS LIMITS",
+          "Building Amount Valuation",
+          "Contents",
+          "Appurtenant Structures",
+          "Building Signs",
+          "Business Income from Dependent Properties",
+          "Business Personal Property Temporariliy in Portable Storage Units",
+          "Commercial Tools and Small Equipment - Any One Tool",
+          "Commercial Tools and Small Equipment - Any Small Piece of Equip",
+          "Commercial Tools and Small Equipment Per Occurrence",
+          "Commercial Tools and Small Equipment - Toolbox",
+          "Computer Funds Transfer Fraud",
+          "Debris Removal",
+          "Deferred Payments",
+          "Definition of Premises",
+          "Electronic Vandalism",
+          "Employee Theft including ERISA Compliance",
+          "Equipment Breakdown Cloud Computing Service Interruption",
+          "Equipment Breakdown Data Restoration",
+          "Equipment Breakdown Expediting Expenses",
+          "Equipment Breakdown Fungi, Wet Rot or Dry Rot",
+          "Equipment Breakdown Hazardous Substances",
+          "Equipment Breakdown Microelectronics",
+          "Equipment Breakdown Off Premise Bus Income, Extra Expense & Data Restoration",
+          "Equipment Breakdown Property Off Premise",
+          "Equipment Breakdown Public Relations",
+          "Equipment Breakdown Spoilage",
+          "Extended Business Income",
+          "Fences and Walls",
+          "Fine Arts",
+          "Fire Dept Service Charge",
+          "Fire Protection Equipment Recharge",
+          "Forgery or Alteration",
+          "Fur & Fur Garments - Theft",
+          "Glass Expenses",
+          "Installation Floater",
+          "Interruption of Computer Operations",
+          "Inventory and Loss Appraisal",
+          "Jewelry & Precious Metal - Theft",
+          "Key Replacement / Lock Repair",
+          "Leasehold Interest (Tenants Only)",
+          "Limited Coverage for Fungi, Wet Rot or Dry Rot",
+          "Money Orders and Counterfeit Money",
+          "Newly Acquired or Constructed Property - Buildings",
+          "Newly Acquired or Constructed Property - Business Income and Extra Expense",
+          "Newly Acquired or Constructed Property - Personal Property",
+          "Outdoor Property Specified COL - Per Occ $1k for any one tree / shrub / plant",
+          "Paved Surfaces",
+          "Personal Effects",
+          "Personal Property in Transit",
+          "Personal Property Off Premises",
+          "Pollutant Cleanup and Removal",
+          "Preservation of Property",
+          "Property of Others in Care, Custody or Control",
+          "Rewards - Arson, Theft and Vandalism",
+          "Salesperson Representative Samples",
+          "Tenant Building Coverage - Required by Lease",
+          "Tenant Building Personal Property Coverage Required by Lease",
+          "Tenant Glass",
+          "Tenant Signs",
+          "Tenant's Improvements and Betterments",
+          "Theft of Telephonic Services",
+          "Theft Damage to Rented Building",
+          "Unauthorized Business Credit Card Use",
+          "Underground Pipes",
+          "Utility Services Business Income & Extra Expense",
+          "Utility Services Direct Damage",
+          "Terrorism",
+          "Advertising Expense to Regain Customers",
+          "Backup or Overflow of a Sewer, Drain or Sump",
+          "Brands and Labels",
+          "Business Income and Extra Expense - Contingent Transit",
+          "Business Income and Extra Expense - Dependent Properties",
+          "Business Income and Extra Expense Transit",
+          "Business Income and Extra Expense - Websites",
+          "Business Income Waiting Period",
+          "Civil Authority",
+          "Computer and Funds Transfer Fraud",
+          "Consequential Loss to Stock",
+          "Contract Penalties",
+          "Denial of Access to Premises",
+          "Expediting Expenses",
+          "Hired Auto - Physical Damage",
+          "International Air Shipments",
+          "Interruption of Computer Operations - On & Off Premises",
+          "Inventory & Loss Appraisal",
+          "Key Replacement and Lock Repair",
+          "Lessor's Lease Cancellation",
+          "Marring and Scratching",
+          "Moneys and Securities - Outside the Premises",
+          "Newly Acquired Constructed Property - Business Income and Extra Expense",
+          "Ordiance or Law - Demolition Cost and Increased Cost of Construction",
+          "Ordiance or Law Increase Period of Restoration",
+          "Ordiance or Law Tenants Improvement Extension",
+          "Outdoor Property",
+          "Personal Property of Others - Replacement Cost",
+          "Portable Electronic Devises Coverage Worldwide",
+          "Precious Metal Theft Payment Changes",
+          "Preservation of Property Expense",
+          "Sales Representative Samples",
+          "Soft Cost",
+          "Spoilage",
+          "Temporary Relocation of Property",
+          "Tenant Relocation",
+          "Underground Water Seepage",
+          "Utility Services - Direct Damage (Excludes overhead trans lines)",
+          "Utility Services Time Element (Excludes overhead trans lines)",
+          "Worldwide Property Off-Premises",
+          "Accounts Receivable",
+          "Computer Equipment",
+          "Property of Other",
+          "Valuable Papers and Records (Other than Electronic Data)",
+          "Accounts Receivable on premises",
+          "Collapse",
+          "Computer Equipment Extra Expense",
+          "Equipment Breakdown",
+          "Money & Securities (On Premises / Off Premises)",
+          "Ordinance or Law Cov A- Undamaged Portion of Building",
+          "Ordinance or Law Cov B&C - Demo Cost, Increased Cost of Construction",
+          "Theft",
+          "Utility Services - Direct Damage (Excl Overhead Trans Lines)",
+          "Utility Services Time Element (Excl Overhead Trans Lines)",
+          "Ordinance or Law Cov A - - Undamaged Portion of Building",
+          "Ordinance or Law Coverage B&C - Demo Cost, Increased Cost of Construction",
+          "Utility Services Direct Damage (Excld Overhead Trans Lines)",
+          "Accounts Receivable (On Premises)",
+          "Compter Equipment",
+          "Utility Services Direct Damage (Exic Overhead Trans Lines)",
+          "Utility Services Time Element (ExIc Overhead Trans Lines)",
+          "Employee Benefits Liability",
+          "Blanket AI included in broadening endt. * Code WOS",
+          "Blanket Waiver of Subrogation * Code PNC",
+          "Primary Non-Contributory",
+          "BUSINESS AUTO-LIABILITY",
+          "BUSINESS AUTO-MEDICAL PAYMENTS",
+          "BUSINESS AUTO-UNINSURED MOTORIST",
+          "BUSINESS AUTO-HIRED / BORROWED LIABILITY",
+          "BUSINESS AUTO-NON-OWNED LIABILITY",
+          "BUSINESS AUTO-PHYSICAL DAMAGE-COMP / OTC",
+          "BUSINESS AUTO-PHYSICAL DAMAGE-COLLISION",
+          "BUSINESS AUTO- HIRED PHYSICAL DAMAGE",
+          "Printers",
+          "IT"
+        ],
+        "coverage_details": {
+          "total_sales_across_locations": {
+            "value": "14,037,846.00",
+            "score": ""
+          },
+          "total_locations_count": {
+            "value": "8",
+            "score": ""
+          },
+          "total_sqft_across_locations": {
+            "value": "",
+            "score": ""
+          },
+          "max_building_tiv": {
+            "value": "10,935,348.00",
+            "score": ""
+          },
+          "max_location_tiv": {
+            "value": "10,935,348.00",
+            "score": ""
+          },
+          "submission_total_insured_value": {
+            "value": "16,298,651.00",
+            "score": ""
+          }
+        }
+      },
+      "Legal_Entity_Type": ""
+    },
+    "Advanced Property": [
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "",
+            "score": ""
+          },
+          "longitude": {
+            "value": "",
+            "score": ""
+          },
+          "total_buildings": {
+            "value": "",
+            "score": ""
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "",
+            "score": ""
+          },
+          "smart_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "total_building_area_sqft": {
+            "value": "",
+            "score": ""
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "",
+            "score": ""
+          },
+          "total_floors": {
+            "value": "",
+            "score": ""
+          },
+          "location_have_sprinklers": {
+            "value": "N",
+            "score": "80.64"
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "",
+            "score": ""
+          },
+          "wildfire_grade_desc": {
+            "value": "",
+            "score": ""
+          },
+          "earthquake_grade": {
+            "value": "",
+            "score": ""
+          },
+          "flood_grade": {
+            "value": "",
+            "score": ""
+          },
+          "wind_grade": {
+            "value": "",
+            "score": ""
+          },
+          "hail_grade": {
+            "value": "",
+            "score": ""
+          },
+          "tornado_grade": {
+            "value": "",
+            "score": ""
+          },
+          "murder_grade": {
+            "value": "",
+            "score": ""
+          },
+          "larceny_grade": {
+            "value": "",
+            "score": ""
+          },
+          "crime_grade": {
+            "value": "",
+            "score": ""
+          },
+          "aggravated_assault_grade": {
+            "value": "",
+            "score": ""
+          },
+          "fire_hydrant_distance": {
+            "value": "",
+            "score": ""
+          },
+          "sinkhole_point_grade": {
+            "value": "",
+            "score": ""
+          },
+          "radon": {
+            "value": "",
+            "score": ""
+          },
+          "coast_distance": {
+            "value": "",
+            "score": ""
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": ""
+          },
+          "motor_vehicle_theft": {
+            "value": "",
+            "score": ""
+          },
+          "burglary_grade": {
+            "value": "",
+            "score": ""
+          },
+          "forcible_rape": {
+            "value": "",
+            "score": ""
+          },
+          "forcible_robbery": {
+            "value": "",
+            "score": ""
+          },
+          "location_id": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "39.9624343",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-86.01145489999999",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "80.64"
+          },
+          "smart_construction_code": {
+            "value": "5",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "30,144",
+            "score": "78.41"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "04",
+            "score": "85.16"
+          },
+          "total_floors": {
+            "value": "2",
+            "score": "87.43"
+          },
+          "location_have_sprinklers": {
+            "value": "N",
+            "score": "80.64"
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "LOSS PAYEE",
+              "party_name": "Lake City Bank C/O Loan Operations",
+              "party_address": "PO Box 1387, Warsaw, IN, 46581",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {
+                "LOCATION": "1.00",
+                "BUILDING": "1.00"
+              }
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "953971",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "D",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA7424A898",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "39.9586193",
+            "score": "86.21"
+          },
+          "longitude": {
+            "value": "-86.0157706",
+            "score": "86.21"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "82.96"
+          },
+          "smart_construction_code": {
+            "value": "5",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "39,804",
+            "score": "78.19"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "02",
+            "score": "85.16"
+          },
+          "total_floors": {
+            "value": "4",
+            "score": "100.00"
+          },
+          "location_have_sprinklers": {
+            "value": "N",
+            "score": "80.64"
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "LOSS PAYEE",
+              "party_name": "Lake City Bank C/O Loan Operations",
+              "party_address": "PO Box 1387, Warsaw, IN, 46581",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {
+                "LOCATION": "2.00",
+                "BUILDING": "1.00"
+              }
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "9585139",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              },
+              {
+                "class_code_for_location": "85230",
+                "exposure_for_location": "1400000",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "2",
+                "classification_of_liability_exposure_for_location": "Computer System Integrators"
+              },
+              {
+                "class_code_for_location": "98111",
+                "exposure_for_location": "3638650",
+                "premium_basis_for_location": "P",
+                "hazard_number_for_location": "3",
+                "classification_of_liability_exposure_for_location": "Office Equipment Repair and Mainenance"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "D",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA743F38F8",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "42.0124278",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-87.9556252",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "",
+            "score": ""
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Masonry Non-Combustible",
+            "score": "77.65"
+          },
+          "smart_construction_code": {
+            "value": "5",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "",
+            "score": ""
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "02",
+            "score": "85.16"
+          },
+          "total_floors": {
+            "value": "",
+            "score": ""
+          },
+          "location_have_sprinklers": {
+            "value": "N",
+            "score": "80.64"
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "LOSS PAYEE",
+              "party_name": "Lake City Bank C/O Loan Operations",
+              "party_address": "PO Box 1387, Warsaw, IN, 46581",
+              "rank": "CERTIFICATE",
+              "loan_number": "",
+              "interest_in_item_details": {
+                "LOCATION": "3.00",
+                "BUILDING": "1.00"
+              }
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "2098736",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              },
+              {
+                "class_code_for_location": "98111",
+                "exposure_for_location": "165520",
+                "premium_basis_for_location": "P",
+                "hazard_number_for_location": "2",
+                "classification_of_liability_exposure_for_location": "Office Equipment Repair and Maintenance"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "F",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA743D6D4E",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "40.4131926",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-86.8525153",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "85.16"
+          },
+          "smart_construction_code": {
+            "value": "4",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "4,560",
+            "score": "75.59"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "P1",
+            "score": "75.59"
+          },
+          "total_floors": {
+            "value": "1",
+            "score": "89.79"
+          },
+          "location_have_sprinklers": {
+            "value": "N",
+            "score": "80.64"
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "> 250 feet AND <= 500 feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "F",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA74313515",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "40.4131926",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-86.8525153",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "85.16"
+          },
+          "smart_construction_code": {
+            "value": "4",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "4,560",
+            "score": "75.59"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "P1",
+            "score": "75.59"
+          },
+          "total_floors": {
+            "value": "1",
+            "score": "89.79"
+          },
+          "location_have_sprinklers": {
+            "value": "NO DATA",
+            "score": ""
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "> 250 feet AND <= 500 feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "F",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA74313515",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "39.9624343",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-86.01145489999999",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "80.64"
+          },
+          "smart_construction_code": {
+            "value": "4",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "30,144",
+            "score": "78.41"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "P1",
+            "score": "75.59"
+          },
+          "total_floors": {
+            "value": "2",
+            "score": "87.43"
+          },
+          "location_have_sprinklers": {
+            "value": "NO DATA",
+            "score": ""
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "2098736",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              },
+              {
+                "class_code_for_location": "98111",
+                "exposure_for_location": "165520",
+                "premium_basis_for_location": "P",
+                "hazard_number_for_location": "2",
+                "classification_of_liability_exposure_for_location": "Office Equipment Repair and Maintenance"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "D",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA7424A898",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "42.0124278",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-87.9556252",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "",
+            "score": ""
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "",
+            "score": ""
+          },
+          "smart_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "total_building_area_sqft": {
+            "value": "",
+            "score": ""
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "P2",
+            "score": "75.59"
+          },
+          "total_floors": {
+            "value": "",
+            "score": ""
+          },
+          "location_have_sprinklers": {
+            "value": "NO DATA",
+            "score": ""
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "9585139",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              },
+              {
+                "class_code_for_location": "85230",
+                "exposure_for_location": "1400000",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "2",
+                "classification_of_liability_exposure_for_location": "Computer System Integrators"
+              },
+              {
+                "class_code_for_location": "98111",
+                "exposure_for_location": "3638650",
+                "premium_basis_for_location": "P",
+                "hazard_number_for_location": "3",
+                "classification_of_liability_exposure_for_location": "Office Equipment Repair and Mainenance"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "F",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA743D6D4E",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "advanced_facts": {
+          "latitude": {
+            "value": "39.9624343",
+            "score": "97.83"
+          },
+          "longitude": {
+            "value": "-86.01145489999999",
+            "score": "97.83"
+          },
+          "total_buildings": {
+            "value": "0",
+            "score": "86.21"
+          },
+          "location_blanket_summary": {
+            "value": [],
+            "score": ""
+          },
+          "construction_type": {
+            "value": "Framing, Steel",
+            "score": "80.64"
+          },
+          "smart_construction_code": {
+            "value": "4",
+            "score": "80.64"
+          },
+          "total_building_area_sqft": {
+            "value": "30,144",
+            "score": "78.41"
+          },
+          "roof_type": {
+            "value": "",
+            "score": ""
+          },
+          "roof_shape": {
+            "value": "",
+            "score": ""
+          },
+          "fire_protection_class_code": {
+            "value": "P1",
+            "score": "75.59"
+          },
+          "total_floors": {
+            "value": "2",
+            "score": "87.43"
+          },
+          "location_have_sprinklers": {
+            "value": "NO DATA",
+            "score": ""
+          },
+          "exterior_construction_features": {
+            "value": "",
+            "score": ""
+          },
+          "exterior_roof_features": {
+            "value": "",
+            "score": ""
+          },
+          "roof_configuration": {
+            "value": "",
+            "score": ""
+          },
+          "sprinkler_pct": {
+            "value": "",
+            "score": ""
+          },
+          "fire_alarm_manufacturer": {
+            "value": "",
+            "score": ""
+          },
+          "additional_interest": {
+            "value": {
+              "interest": "",
+              "party_name": "",
+              "party_address": "",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": ""
+            },
+            "score": ""
+          },
+          "schedule_of_hazards": {
+            "value": [
+              {
+                "class_code_for_location": "12362",
+                "exposure_for_location": "953971",
+                "premium_basis_for_location": "S",
+                "hazard_number_for_location": "1",
+                "classification_of_liability_exposure_for_location": "Office Equipment Wholesalers"
+              }
+            ],
+            "score": ""
+          },
+          "wildfire_grade": {
+            "value": "A",
+            "score": "85.16"
+          },
+          "wildfire_grade_desc": {
+            "value": "None/Very Low",
+            "score": "85.16"
+          },
+          "earthquake_grade": {
+            "value": "B",
+            "score": "89.79"
+          },
+          "flood_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "wind_grade": {
+            "value": "A",
+            "score": "89.79"
+          },
+          "hail_grade": {
+            "value": "D",
+            "score": "89.79"
+          },
+          "tornado_grade": {
+            "value": "C",
+            "score": "89.79"
+          },
+          "murder_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "larceny_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "crime_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "aggravated_assault_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "fire_hydrant_distance": {
+            "value": "< 250 Feet",
+            "score": "86.21"
+          },
+          "sinkhole_point_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "radon": {
+            "value": "D",
+            "score": "85.16"
+          },
+          "coast_distance": {
+            "value": "> 100",
+            "score": "80.64"
+          },
+          "coast_distance_unit": {
+            "value": "miles",
+            "score": "80.64"
+          },
+          "motor_vehicle_theft": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "burglary_grade": {
+            "value": "C",
+            "score": "85.16"
+          },
+          "forcible_rape": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "forcible_robbery": {
+            "value": "B",
+            "score": "85.16"
+          },
+          "location_id": {
+            "value": "LUS118E410DA7424A898",
+            "score": ""
+          }
+        },
+        "rms_details": {
+          "rms_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "rms_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "atc_details": {
+          "atc_construction_code": {
+            "value": "",
+            "score": ""
+          },
+          "atc_construction_description": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "protection_details": {
+          "burglar_alarm_type": {
+            "value": "",
+            "score": ""
+          }
+        }
+      }
+    ],
+    "Loss Run": [
+      {
+        "options": {
+          "claim_history": []
+        },
+        "scores": {}
+      }
+    ],
+    "General Liability": {
+      "gl_facts": {
+        "total_full_time_employees": {
+          "value": "0",
+          "score": "60.00"
+        },
+        "total_part_time_employees": {
+          "value": "",
+          "score": ""
+        },
+        "deductible": {
+          "value": {
+            "UMBRELLA RETAINED LIMIT": "10,000.00"
+          },
+          "score": "85.16"
+        },
+        "existing_insurance": {
+          "value": [],
+          "score": "82.77"
+        },
+        "additional_interest": {
+          "value": [
+            {
+              "interest": "BREACH OF WARRANTY",
+              "party_name": "Lake City Bank C/O Loan Operations",
+              "party_address": "PO Box 1387, Warsaw, IN, 46581",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "MORTGAGEE",
+              "party_name": "Lake City Bank",
+              "party_address": "100 West 96th Street, Lake City Bank Street Indianapolis, IN, 46260",
+              "rank": "EVIDENCE  NAME AND ADDRESS  CERTIFICATE POLICY SEND BILL Lake City Bank 100 West 96th Street Indianapolis, IN 46260",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "Other",
+              "party_name": "Unity Healthcare, LLC",
+              "party_address": "1250 S. Creasy Lane, Lafayette, IN, 47905",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": "30 Day NOC"
+            },
+            {
+              "interest": "ADDITIONAL INSURED",
+              "party_name": "Michigan 30, L.L.C.",
+              "party_address": "30 N. Michigan Avenue, Suite 270, Chicago, IL, 60602",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": "30-Day Notice of Cancellation"
+            },
+            {
+              "interest": "ADDITIONAL INSURED",
+              "party_name": "OND Property LLC",
+              "party_address": ", Chicago, IL, 60602",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": "Notice of Cancellation"
+            },
+            {
+              "interest": "MORTGAGEE",
+              "party_name": "Terressa J Braden",
+              "party_address": "Terressa J Braden, Bra, ,",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "LPF Woodview, LLC",
+              "party_address": ",",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "POLICY",
+              "party_address": "POLICY, ,",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "POLICY",
+              "party_address": "POLICY, ,",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "Lake City Bank",
+              "party_address": "100 West 96th St, Lake City Bank St Indianapolis, IN, 46260",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {
+                "LOCATION": "2",
+                "BUILDING": "1",
+                "ITEM DESCRIPTION": "8700 North Street Suite 400 Fishers, IN 46038"
+              },
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "POLICY",
+              "party_address": "POLICY, ,",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {},
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            },
+            {
+              "interest": "",
+              "party_name": "HTD Leasing LLC",
+              "party_address": "PO Box 105704, Atlanta, GA, 30348",
+              "rank": "",
+              "loan_number": "",
+              "interest_in_item_details": {
+                "VEHICLE": "1"
+              },
+              "lien_amount": "",
+              "interest_end_date": "",
+              "party_phone_number": "",
+              "party_email_address": "",
+              "party_fax_number": "",
+              "reason_for_interest": ""
+            }
+          ],
+          "score": ""
+        },
+        "additional_insureds": {
+          "value": [
+            {
+              "address": "Braden Technology Lane, LLC",
+              "gl_code": "",
+              "sic_code": "",
+              "naics_code": "",
+              "fein": "",
+              "phone_number": "",
+              "website": "",
+              "legal_entity_type": ""
+            },
+            {
+              "address": "Braden Municipal Drive, LLC",
+              "gl_code": ""
+            }
+          ],
+          "score": ""
+        }
+      },
+      "gl_options": {
+        "retroactive_date": {
+          "value": "",
+          "score": ""
+        }
+      }
+    },
+    "Property": [
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "0",
+            "score": "85.16"
+          },
+          "location_address": {
+            "value": "BLANKET",
+            "score": "85.16"
+          },
+          "location_city": {
+            "value": "",
+            "score": ""
+          },
+          "location_state": {
+            "value": "",
+            "score": ""
+          },
+          "location_postal_code": {
+            "value": "",
+            "score": ""
+          },
+          "location_country": {
+            "value": "",
+            "score": ""
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {
+            "BLANKET BUILDING LIMITS": {
+              "value": "10,155,738.00",
+              "score": "70.17"
+            },
+            "BLANKET CONTENTS LIMITS": {
+              "value": "3,675,697.00",
+              "score": "70.17"
+            }
+          },
+          "100_pct_limit": {
+            "value": "13,831,435.00",
+            "score": "85.16"
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "0",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "location_address": {
+            "value": "11815 Technology Ln",
+            "score": "84.34"
+          },
+          "location_city": {
+            "value": "Fishers",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "46038",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "1993",
+            "score": "77.63"
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {
+            "Contents": {
+              "value": "953,628.00",
+              "score": "70.17"
+            },
+            "Building Amount Valuation": {
+              "value": "3,903,662.00",
+              "score": "70.17"
+            }
+          },
+          "100_pct_limit": {
+            "value": "4,857,290.00",
+            "score": "85.16"
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "location_address": {
+            "value": "8700 North St Suite 400",
+            "score": "78.19"
+          },
+          "location_city": {
+            "value": "Fishers",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "46038",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "2017",
+            "score": "78.52"
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {
+            "Contents": {
+              "value": "1,765,377.00",
+              "score": "70.17"
+            },
+            "Building Amount Valuation": {
+              "value": "9,169,971.00",
+              "score": "70.17"
+            }
+          },
+          "100_pct_limit": {
+            "value": "10,935,348.00",
+            "score": "85.16"
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "2",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "location_address": {
+            "value": "951 Cambridge Dr",
+            "score": "84.34"
+          },
+          "location_city": {
+            "value": "Elk Grove Village",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IL",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "60007",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "1974",
+            "score": "79.34"
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {
+            "Contents": {
+              "value": "506,013.00",
+              "score": "70.17"
+            }
+          },
+          "100_pct_limit": {
+            "value": "506,013.00",
+            "score": "85.16"
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "3",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "location_address": {
+            "value": "310 Farabee Dr",
+            "score": "84.34"
+          },
+          "location_city": {
+            "value": "Lafayette",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "47905",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {},
+          "100_pct_limit": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "4",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "",
+            "score": ""
+          },
+          "location_address": {
+            "value": "310 Farabee Dr",
+            "score": "69.90"
+          },
+          "location_city": {
+            "value": "Lafayette",
+            "score": "69.90"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "69.90"
+          },
+          "location_postal_code": {
+            "value": "47905",
+            "score": "69.90"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {},
+          "100_pct_limit": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "",
+            "score": ""
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "",
+            "score": ""
+          },
+          "location_address": {
+            "value": "11815 Technology Ln",
+            "score": "84.34"
+          },
+          "location_city": {
+            "value": "Fishers",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "46038",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {},
+          "100_pct_limit": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "3",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "",
+            "score": ""
+          },
+          "location_address": {
+            "value": "951 Cambridge Dr",
+            "score": "84.34"
+          },
+          "location_city": {
+            "value": "Elk Grove Village",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IL",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "60007",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {},
+          "100_pct_limit": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "2",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      },
+      {
+        "standard_facts": {
+          "building_number": {
+            "value": "",
+            "score": ""
+          },
+          "location_address": {
+            "value": "8700 North St",
+            "score": "78.19"
+          },
+          "location_city": {
+            "value": "Fishers",
+            "score": "84.34"
+          },
+          "location_state": {
+            "value": "IN",
+            "score": "84.34"
+          },
+          "location_postal_code": {
+            "value": "46038",
+            "score": "84.34"
+          },
+          "location_country": {
+            "value": "US",
+            "score": "69.90"
+          },
+          "location_occupancy_description": {
+            "value": "",
+            "score": ""
+          },
+          "year_built": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "limits": {
+          "100_pct_coverage_limits": {},
+          "100_pct_limit": {
+            "value": "",
+            "score": ""
+          }
+        },
+        "building_details": {
+          "location_doc_id": {
+            "value": "1",
+            "score": "85.16"
+          },
+          "atc_occupancy_description": {
+            "value": "",
+            "score": ""
+          }
+        }
+      }
+    ],
+    "Auto": {
+      "Auto": {
+        "auto_facts": {
+          "deductible": {
+            "value": {
+              "UMBRELLA RETAINED LIMIT": "10,000.00"
+            },
+            "score": "85.16"
+          },
+          "liability_covered_auto_symbols": {
+            "value": [
+              "1-ANY AUTO"
+            ],
+            "score": "85.16"
+          },
+          "comprehensive_covered_auto_symbols": {
+            "value": [
+              "7-SPECIFICALLY DESCRIBED AUTOS"
+            ],
+            "score": "85.16"
+          },
+          "collision_covered_auto_symbols": {
+            "value": [
+              "7-SPECIFICALLY DESCRIBED AUTOS"
+            ],
+            "score": "85.16"
+          },
+          "pip_covered_auto_symbols": {
+            "value": [],
+            "score": ""
+          },
+          "medical_payments_covered_auto_symbols": {
+            "value": [
+              "2-OWNED AUTOS ONLY"
+            ],
+            "score": "85.16"
+          },
+          "towing_auto_covered_auto_symbols": {
+            "value": [],
+            "score": ""
+          },
+          "business_auto_non_owned_liability_employees": {
+            "value": "25",
+            "score": "100.00"
+          },
+          "business_auto_non_owned_liability_volunteers": {
+            "value": "",
+            "score": ""
+          },
+          "truckers_non_owned_liability_employees": {
+            "value": "",
+            "score": ""
+          },
+          "truckers_non_owned_liability_volunteers": {
+            "value": "",
+            "score": ""
+          },
+          "motor_carrier_non_owned_liability_employees": {
+            "value": "",
+            "score": ""
+          },
+          "motor_carrier_non_owned_liability_volunteers": {
+            "value": "",
+            "score": ""
+          },
+          "vehicles": {
+            "value": [
+              {
+                "make": "Ford",
+                "model": "F150",
+                "vin": "1FTEW1EP3LKF45845",
+                "original_cost": "46,040.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Audi",
+                "model": "S4",
+                "vin": "WAUB4AF48KA112195",
+                "original_cost": "55,470.00",
+                "garage_state": ""
+              },
+              {
+                "make": "ISU",
+                "model": "NPR",
+                "vin": "54DC4W1B2ESB00066",
+                "original_cost": "43,000.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Nissan",
+                "model": "NV 1500",
+                "vin": "1N6BF0KL9EN111152",
+                "original_cost": "26,990.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Honda",
+                "model": "Civic",
+                "vin": "19XFC1F92GE014674",
+                "original_cost": "26,700.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Nissan",
+                "model": "NV",
+                "vin": "1N6AF0LY2CN106619",
+                "original_cost": "30,490.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Volvo",
+                "model": "S60",
+                "vin": "YV1622FS5C2101241",
+                "original_cost": "36,000.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Isuzu",
+                "model": "NPR HD",
+                "vin": "54DC4W1B1JS809182",
+                "original_cost": "52,420.00",
+                "garage_state": ""
+              },
+              {
+                "make": "Toyota",
+                "model": "Corolla LE",
+                "vin": "5YFBURHE9HP689314",
+                "original_cost": "23,000.00",
+                "garage_state": "IN"
+              },
+              {
+                "make": "Toyota",
+                "model": "Corolla LE",
+                "vin": "5YFBURHE8HP708631",
+                "original_cost": "23,000.00",
+                "garage_state": "IN"
+              },
+              {
+                "make": "Toyota",
+                "model": "Corolla LE",
+                "vin": "5YFBURHE0HP697821",
+                "original_cost": "23,000.00",
+                "garage_state": "IN"
+              },
+              {
+                "make": "Toyota",
+                "model": "Corolla LE",
+                "vin": "5YFBURHE5HP699712",
+                "original_cost": "23,000.00",
+                "garage_state": "IN"
+              },
+              {
+                "make": "Isuzu",
+                "model": "NPR",
+                "vin": "54DB4W1B0KS807086",
+                "original_cost": "35,000.00",
+                "garage_state": "IN"
+              },
+              {
+                "make": "Mercedes",
+                "model": "C300",
+                "vin": "W1KAF4HB6PR100289",
+                "original_cost": "48,705.00",
+                "garage_state": ""
+              }
+            ],
+            "score": ""
+          },
+          "auto": {
+            "value": {
+              "total_power_units": "14"
+            },
+            "score": ""
+          }
+        }
+      }
+    },
+    "Workers Compensation": [
+      {
+        "facts": {
+          "employees": [
+            {
+              "state": "IL",
+              "location_id": "2",
+              "class_code": "5191",
+              "class_description": "Office Machine Installation Inspection - Adjustment or repair",
+              "employee_category": "Office Machine Installation Inspection - Adjustment or repair",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "165,500.00",
+              "premium_rate": "1.62000",
+              "estimated_annual_premium": "2,681.00"
+            },
+            {
+              "state": "IL",
+              "location_id": "2",
+              "class_code": "8742",
+              "class_description": "Salespersons Outside",
+              "employee_category": "Salespersons Outside",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "288,900.00",
+              "premium_rate": "0.34000",
+              "estimated_annual_premium": "982.00"
+            },
+            {
+              "state": "IL",
+              "location_id": "2",
+              "class_code": "8810",
+              "class_description": "Clerical Office Employees NOC",
+              "employee_category": "Clerical Office Employees NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "210,400.00",
+              "premium_rate": "0.15000",
+              "estimated_annual_premium": "316.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "5191",
+              "class_description": "Office machine installation inspection - adjustment or repair",
+              "employee_category": "Office machine installation inspection - adjustment or repair",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "638,600.00",
+              "premium_rate": "0.87000",
+              "estimated_annual_premium": "5,556.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "7380",
+              "class_description": "Chauffeurs NOC",
+              "employee_category": "Chauffeurs NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "24,600.00",
+              "premium_rate": "3.45000",
+              "estimated_annual_premium": "849.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "8742",
+              "class_description": "Salespersons outside",
+              "employee_category": "Salespersons outside",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "739,500.00",
+              "premium_rate": "0.20000",
+              "estimated_annual_premium": "1,479.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "8810",
+              "class_description": "Clerical office employees NOC",
+              "employee_category": "Clerical office employees NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "2,398,400.00",
+              "premium_rate": "0.15000",
+              "estimated_annual_premium": "3,598.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "8803",
+              "class_description": "Auditors - Traveling",
+              "employee_category": "Auditors - Traveling",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "192,100.00",
+              "premium_rate": "0.07000",
+              "estimated_annual_premium": "134.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "1",
+              "class_code": "8018",
+              "class_description": "Store: Wholesale NOC",
+              "employee_category": "Store: Wholesale NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "109,000.00",
+              "premium_rate": "2.52000",
+              "estimated_annual_premium": "2,747.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "3",
+              "class_code": "8810",
+              "class_description": "Clerical office employees NOC",
+              "employee_category": "Clerical office employees NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "1,800.00",
+              "premium_rate": "0.15000",
+              "estimated_annual_premium": "3.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "4",
+              "class_code": "8742",
+              "class_description": "Salesperson Outside",
+              "employee_category": "Salesperson Outside",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "0.00",
+              "premium_rate": "0.20000",
+              "estimated_annual_premium": "0.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "4",
+              "class_code": "8810",
+              "class_description": "Clerical Office Employees NOC",
+              "employee_category": "Clerical Office Employees NOC",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "0.00",
+              "premium_rate": "0.15000",
+              "estimated_annual_premium": "0.00"
+            },
+            {
+              "state": "IN",
+              "location_id": "4",
+              "class_code": "5191",
+              "class_description": "Office Machine Installation",
+              "employee_category": "Office Machine Installation",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "0.00",
+              "premium_rate": "0.87000",
+              "estimated_annual_premium": "0.00"
+            },
+            {
+              "state": "",
+              "location_id": "4",
+              "class_code": "",
+              "class_description": "",
+              "employee_category": "",
+              "total_full_time_employees": "",
+              "total_part_time_employees": "",
+              "employee_category_sic_code": "",
+              "employee_category_naics_code": "",
+              "estimated_annual_remuneration": "",
+              "premium_rate": "",
+              "estimated_annual_premium": ""
+            }
+          ]
+        },
+        "scores": {
+          "employees_state": "85.16",
+          "employees_location_id": "85.16",
+          "employees_class_code": "85.16",
+          "employees_class_description": "85.16",
+          "employees_employee_category": "85.16",
+          "total_full_time_employees": "85.16",
+          "employees_total_part_time_employees": "85.16",
+          "employees_employee_category_sic_code": "85.16",
+          "emplloyees_employee_category_naics_code": "85.16",
+          "employees_estimated_annual_remuneration": "85.16",
+          "employees_premium_rate": "85.16",
+          "employees_estimated_annual_premium": "85.16"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch with internal state should work as expected Should render correctly 1`] = `
+<label
+  className="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+>
+  <span
+    className="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
+  >
+    <span
+      className="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorSecondary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorSecondary Mui-checked Mui-checked css-priqlz-MuiButtonBase-root-MuiSwitch-switchBase"
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={null}
+    >
+      <input
+        checked={true}
+        className="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
+        name="isOptional"
+        onChange={[Function]}
+        required={false}
+        type="checkbox"
+      />
+      <span
+        className="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
+      />
+    </span>
+    <span
+      className="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
+    />
+  </span>
+</label>
+`;

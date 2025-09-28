@@ -1,0 +1,193 @@
+import DecisionNodeModel from '../nodeModels/decisionNode/DecisionNodeModel'
+import EndNodeModel from '../nodeModels/endNode/EndNodeModel'
+import LambdaNodeModel from '../nodeModels/lambdaNode/LambdaNodeModel'
+import StartNodeModel from '../nodeModels/startNode/StartNodeModel'
+import JoinNodeModel from '../nodeModels/joinNode/JoinNodeModel'
+import TerminateNodeModel from '../nodeModels/terminateNode/TerminateNodeModel'
+import ForkNodeModel from '../nodeModels/forkNode/ForkNodeModel'
+import DynamicForkNodeModel from '../nodeModels/dynamicForkNode/DynamicForkNodeModel'
+import EventNodeModel from '../nodeModels/eventNode/EventNodeModel'
+import HttpNodeModel from '../nodeModels/httpNode/HttpNodeModel'
+import { includes } from 'ramda'
+import SubworkflowNodeModel from '../nodeModels/subworkflowNode/SubworkflowNodeModel'
+import TaskNodeModel from '../nodeModels/taskNode/TaskNodeModel'
+
+const nodeConfigData = {
+  START: {
+    name: 'START',
+    type: 'START',
+    color: 'rgb(0,0,0)',
+    getInstance: () => new StartNodeModel()
+  },
+  LAMBDA: {
+    name: 'LAMBDA',
+    type: 'LAMBDA',
+    color: 'rgb(255,233,28)',
+    hasParametersTab: true,
+    getInstance: task => new LambdaNodeModel(task)
+  },
+  EVENT: {
+    name: 'EVENT',
+    type: 'EVENT',
+    color: 'rgb(254,58,158)',
+    hasParametersTab: true,
+    getInstance: task => new EventNodeModel(task)
+  },
+  HTTP: {
+    name: 'HTTP',
+    type: 'HTTP',
+    color: 'rgb(255,152,0)',
+    hasParametersTab: true,
+    getInstance: task => new HttpNodeModel(task)
+  },
+  DECISION: {
+    name: 'DECISION',
+    type: 'DECISION',
+    color: 'rgb(20, 247, 127)',
+    hasParametersTab: true,
+    getInstance: task => new DecisionNodeModel(task)
+  },
+  TERMINATE: {
+    name: 'TERMINATE',
+    type: 'TERMINATE',
+    color: 'rgb(255,0,0)',
+    hasParametersTab: false,
+    terminationStatus: {
+      completed: 'COMPLETED',
+      failed: 'FAILED'
+    },
+    getInstance: task => new TerminateNodeModel(task)
+  },
+  JOIN: {
+    name: 'JOIN',
+    type: 'JOIN',
+    color: 'rgb(63,81,181)',
+    hasParametersTab: true,
+    getInstance: task => new JoinNodeModel(task)
+  },
+  FORK_JOIN: {
+    name: 'FORK',
+    type: 'FORK_JOIN',
+    color: 'rgb(53,137,204)',
+    getInstance: task => new ForkNodeModel(task)
+  },
+  FORK_JOIN_DYNAMIC: {
+    name: 'DYNAMIC_FORK',
+    type: 'FORK_JOIN_DYNAMIC',
+    color: 'rgb(177 94 224)',
+    hasParametersTab: true,
+    getInstance: task => new DynamicForkNodeModel(task)
+  },
+  SUB_WORKFLOW: {
+    name: 'SUB_WORKFLOW',
+    type: 'SUB_WORKFLOW',
+    color: 'rgb(23,165,219)',
+    hasParametersTab: true,
+    getInstance: task => new SubworkflowNodeModel(task)
+  },
+  TASK: {
+    name: 'TASK',
+    type: 'SIMPLE',
+    color: 'rgb(123,132,220)',
+    hasParametersTab: true,
+    getInstance: task => new TaskNodeModel(task)
+  },
+  SIMPLE: {
+    name: 'TASK',
+    type: 'SIMPLE',
+    color: 'rgb(123,132,220)',
+    hasParametersTab: true,
+    getInstance: task => new TaskNodeModel(task)
+  },
+  DYNAMIC: {
+    name: 'TASK',
+    type: 'DYNAMIC',
+    color: 'rgb(123,132,220)',
+    hasParametersTab: true,
+    getInstance: task => new TaskNodeModel(task)
+  },
+  END: {
+    name: 'END',
+    type: 'END',
+    color: 'rgb(0,0,0)',
+    getInstance: () => new EndNodeModel()
+  },
+    // ✅ ADD THIS NEW ENTRY
+  TOOL: {
+    name: 'TOOL',
+    type: 'HTTP',
+    color: 'rgb(76, 175, 80)',
+    hasParametersTab: true,
+    getInstance: tool => {
+      
+      const toolName = tool?.name || tool?.toolName || 'unknown_tool'
+      
+      return new HttpNodeModel({
+        ...tool,
+        type: 'HTTP',
+        name: toolName,
+        taskReferenceName: tool?.taskReferenceName || `tool_${toolName}_${Date.now()}`,
+        inputParameters: {
+          http_request: {
+            uri: `http://flask-server:7000/tools/${toolName}/execute`,
+            method: 'POST',
+            accept: 'application/json',
+            contentType: 'application/json',
+            headers: {},
+            body: '${workflow.input}',
+            asyncComplete: false,
+            connectionTimeOut: 300000,
+            readTimeOut: 300000
+          }
+        }
+      })
+    }
+  },
+
+  AGENT: {
+    name: 'AGENT',
+    type: 'HTTP', // Agents become HTTP tasks
+    color: 'rgb(156, 39, 176)', // Purple color matching tray
+    hasParametersTab: true,
+    getInstance: agent => {
+      const agentName = agent?.name || agent?.agentName || 'unknown_agent'
+      return new HttpNodeModel({
+        ...agent,
+        type: 'HTTP',
+        name: agentName,
+        taskReferenceName: agent?.taskReferenceName || `agent_${agentName}_${Date.now()}`,
+        inputParameters: {
+          http_request: {
+            uri: `http://flask-server:7000/agents/${agentName}/execute`, // Your dummy endpoint
+            method: 'POST',
+            accept: 'application/json',
+            contentType: 'application/json',
+            headers: {},
+            body: '${workflow.input}',
+            asyncComplete: false,
+            connectionTimeOut: 300000,
+            readTimeOut: 300000
+          }
+        }
+      })
+    }
+  }
+}
+
+const handler = {
+  get(nodeConfigData, prop, _receiver) {
+    return nodeConfigData[prop] ?? nodeConfigData['TASK']
+  }
+}
+
+export const nodeConfig = new Proxy(nodeConfigData, handler)
+
+export const isDefault = type =>
+  includes(type, [
+    nodeConfig.LAMBDA.type,
+    nodeConfig.TERMINATE.type,
+    nodeConfig.EVENT.type,
+    nodeConfig.HTTP.type,
+    nodeConfig.SUB_WORKFLOW.type,
+    nodeConfig.TASK.type
+  ])

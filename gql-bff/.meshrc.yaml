@@ -1,0 +1,24 @@
+sources:
+  - name: Conductor
+    handler:
+      openapi:
+        source: ${BASE_API_URL}/api-docs
+        baseUrl: ${BASE_API_URL}
+additionalTypeDefs:
+  - ./src/features/workflow/schema.graphql
+  - ./src/features/task/schema.graphql
+  - ./src/features/workflowHistory/schema.graphql
+  - ./src/features/execution/schema.graphql
+  - ./src/features/logs/schema.graphql
+  - ./src/features/eventHandler/schema.graphql
+  - ./src/features/schedule/schema.graphql
+  - ./src/features/features/schema.graphql
+  - ./src/features/tools/schema.graphql
+  - ./src/features/agents/schema.graphql
+
+additionalResolvers:
+  - ./src/startup/additionalResolvers.js
+serve:
+  port: 5000
+  cors:
+    allowedHeaders: ["authorization", "content-type", "OPTIONS"]

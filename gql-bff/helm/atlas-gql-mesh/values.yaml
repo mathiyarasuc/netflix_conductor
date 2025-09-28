@@ -1,0 +1,50 @@
+# Default values for tasks-gql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  imagePullSecrets:
+  - name: "registrykey"
+
+  runtimeConfiguration:
+    enabled: false
+    configMap: atlas-runtime-config
+    csi:
+      secretProviderClass: atlas-runtime-secrets
+
+  multiTenancy:
+    tenancyType: "MonoTenant" # "MultiTenant" "MonoTenant"
+
+  gateway:
+    enabled: false
+
+gql:
+  enabled: true
+  replicaCount: 1
+  name: "atlas-gql-mesh"
+  image:
+    repository: "ghcr.io/osstotalsoft/"
+    pullPolicy: IfNotPresent
+    name: atlas-gql-mesh
+    tag: "" # overwrite from pipeline
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 4000
+
+  resources:
+    limits:
+      memory: 512Mi
+
+  # Additional environment variables
+  env:
+    ELASTIC_SEARCH_LOGGING_LEVEL: "[ELASTIC_SEARCH_LOGGING_LEVEL]"
+    ELASTIC_SEARCH_HOST: "[ELASTIC_SEARCH_HOST]"
+    IDENTITY_AUTHORITY: "[IDENTITY_AUTHORITY_URL]"
+    APOLLO_LOGGING_LEVEL: "[APOLLO_LOGGING_LEVEL]"
+    ELASTIC_VERSION: 6
+    ELASTIC_PREFIX: "atlas"
+    API_URL: "[API_URL]"
+    BASE_API_URL: "[BASE_API_URL]"
+    PORT: "4000"
+    #

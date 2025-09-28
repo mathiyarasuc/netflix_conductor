@@ -1,0 +1,45 @@
+# Agent types - Match your backend response structure
+type Agent {
+  AgentID: String
+  AgentName: String!
+  AgentDesc: String
+  CreatedOn: String
+  Configuration: JSON
+  coreFeatures: JSON
+  isManagerAgent: Boolean
+  knowledge_base: JSON
+  llmModel: String
+  llmProvider: String
+  managerAgentIntention: String
+  selectedKnowledgeBase: String
+  selectedManagerAgents: [String]
+}
+
+type AgentsResponse {
+  status: String!
+  agents: [String!]!
+  count: Int!
+}
+
+# Returns complete agent document (not just Configuration)
+type AgentDetailsResponse {
+  AgentID: String
+  AgentName: String!
+  AgentDesc: String
+  CreatedOn: String
+  Configuration: JSON
+  coreFeatures: JSON
+  isManagerAgent: Boolean
+  knowledge_base: JSON
+  llmModel: String
+  llmProvider: String
+  managerAgentIntention: String
+  selectedKnowledgeBase: String
+  selectedManagerAgents: [String]
+}
+
+# Extend existing Query type
+extend type Query {
+  getAgentsList: AgentsResponse!
+  getAgentDetails(agentName: String!): AgentDetailsResponse
+}

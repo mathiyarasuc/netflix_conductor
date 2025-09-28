@@ -1,0 +1,36 @@
+# Tool types - Match your backend response structure
+type Tool {
+  tool_name: String
+  description: String
+  input_schema: JSON
+  output_schema: JSON
+  github_url: String
+  version: Int
+  uses_llm: Boolean
+  dependencies: [String]
+  requires_env_vars: [String]
+  default_llm_model: String         
+  default_system_instructions: String 
+  structured_output: Boolean         
+  config: JSON                       
+  type: String                       
+  tool_id: String                    
+}
+
+type ToolsResponse {
+  status: String!
+  tools: [String!]!
+  count: Int!
+}
+
+type ToolDetailsResponse {
+  status: String!
+  message: String
+  tool_details: Tool
+}
+
+# Extend existing Query type
+extend type Query {
+  getToolsList: ToolsResponse!
+  getToolDetails(toolName: String!): ToolDetailsResponse!
+}
