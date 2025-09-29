@@ -35,13 +35,14 @@ jobs:
               
               "echo '--- Stopping and removing old containers ---'",
               "docker stop conductor-server conductor-ui redis elasticsearch nats nats-streaming flask-server gql-bff react-ui || true",
-              "docker rm conductor-server conductor-ui redis elasticsearch nats nats-streaming flask-server gql-bff react-ui || true",
+              "docker rm -f conductor-server conductor-ui redis elasticsearch nats nats-streaming flask-server gql-bff react-ui || true",
 
               "echo '--- Cleaning up Docker system to free up space ---'",
               "docker system prune -af",
 
               "echo '--- Removing old Docker network ---'",
               "docker network rm conductor-dev-net || true",
+              "docker network prune -f",
 
               "echo '--- Creating Docker network ---'",
               "docker network create conductor-dev-net",
