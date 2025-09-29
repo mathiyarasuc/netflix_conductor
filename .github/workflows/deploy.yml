@@ -86,9 +86,9 @@ jobs:
               "docker build -t gql-bff:latest ./gql-bff",
               "docker run -d --name gql-bff --network conductor-dev-net -p 5001:5000 -e NODE_ENV=development -e PORT=5000 -e ELASTIC_SEARCH_HOST=http://elasticsearch:9200 -e ELASTIC_USER= -e ELASTIC_PASSWORD= -e ELASTIC_VERSION=7 -e ELASTIC_PREFIX=atlas -e APOLLO_LOGGING_LEVEL=ERROR -e TOOLS_API_URL=http://flask-server:7000 -e AGENTS_API_URL=http://flask-server:7000 -e BASE_API_URL=http://host.docker.internal:8080 -e IS_MULTITENANT=false --add-host host.docker.internal:172.17.0.1 --restart always --health-cmd='curl -s http://localhost:5000/ >/dev/null 2>&1 || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
 
-              "echo '--- Building and starting React UI (Frontend) - MATCHING docker-compose.yml ---'",
-              "docker build -t react-ui:latest ./react-ui",
-              "docker run -d --name react-ui --network conductor-dev-net -p 3001:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=atlas-gql.enowclear360.com -e REACT_APP_GQL_HTTP_PROTOCOL=https -e REACT_APP_GQL_WS_PROTOCOL=wss -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
+              "echo '--- Building and starting React UI (Frontend - PRODUCTION BUILD) ---'",
+              "docker build -t react-ui:latest --build-arg REACT_APP_THEME=default --build-arg REACT_APP_VERSION=0.0.0 --build-arg REACT_APP_GQL=atlas-gql.enowclear360.com --build-arg REACT_APP_GQL_HTTP_PROTOCOL=https --build-arg REACT_APP_GQL_WS_PROTOCOL=wss --build-arg REACT_APP_USE_NBB_MESSAGE=true ./react-ui",
+              "docker run -d --name react-ui --network conductor-dev-net -p 3001:80 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
 
               "echo '--- Waiting for all services to stabilize ---'",
               "sleep 60",
