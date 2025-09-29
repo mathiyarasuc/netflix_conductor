@@ -18,9 +18,6 @@ ENV REACT_APP_GQL_HTTP_PROTOCOL=$REACT_APP_GQL_HTTP_PROTOCOL
 ENV REACT_APP_GQL_WS_PROTOCOL=$REACT_APP_GQL_WS_PROTOCOL
 ENV REACT_APP_USE_NBB_MESSAGE=$REACT_APP_USE_NBB_MESSAGE
 
-# Enable Corepack for Yarn 3.5.0
-RUN corepack enable && corepack prepare yarn@3.5.0 --activate
-
 COPY package*.json ./
 COPY yarn.lock ./
 RUN yarn install --frozen-lockfile
