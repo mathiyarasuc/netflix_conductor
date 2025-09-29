@@ -23,7 +23,7 @@ RUN corepack enable && corepack prepare yarn@3.5.0 --activate
 
 COPY package*.json ./
 COPY yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install
 COPY . .
 RUN yarn build
 
