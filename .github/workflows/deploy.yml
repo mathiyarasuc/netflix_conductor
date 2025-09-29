@@ -88,7 +88,7 @@ jobs:
 
               "echo '--- Building and starting React UI (Frontend) - MATCHING docker-compose.yml ---'",
               "docker build -t react-ui:latest ./react-ui",
-              "docker run -d --name react-ui --network conductor-dev-net -p 3001:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=localhost:5001 -e REACT_APP_GQL_HTTP_PROTOCOL=http -e REACT_APP_GQL_WS_PROTOCOL=ws -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
+              "docker run -d --name react-ui --network conductor-dev-net -p 3001:3000 -e REACT_APP_THEME=default -e REACT_APP_VERSION=0.0.0 -e REACT_APP_GQL=atlas-gql.enowclear360.com -e REACT_APP_GQL_HTTP_PROTOCOL=https -e REACT_APP_GQL_WS_PROTOCOL=wss -e REACT_APP_USE_NBB_MESSAGE=true --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
 
               "echo '--- Waiting for all services to stabilize ---'",
               "sleep 60",
