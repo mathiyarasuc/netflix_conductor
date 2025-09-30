@@ -26,61 +26,83 @@ jobs:
 
       - name: Deploy to EC2 via SSM
         run: |
-          COMMANDS_JSON=$(cat <<'EOF'
+          COMMANDS_JSON=$(cat <<EOF
           {
             "commands": [
               "#!/bin/bash",
               "set -e",
+              "echo '--- PRODUCTION DEPLOYMENT WITHOUT MONGODB/SCHELLAR + CUSTOM SERVICES ---'",
               
-              "echo '=== CLEANING UP ==='",
-              "docker stop $(docker ps -aq) 2>/dev/null || true",
-              "docker rm $(docker ps -aq) 2>/dev/null || true",
-              "docker system prune -af --volumes",
-              "docker network rm conductor-dev-net 2>/dev/null || true",
-              
-              "echo '=== CREATING NETWORK ==='",
+              "echo '--- Stopping and removing old containers ---'",
+              "docker stop conductor-server conductor-ui redis elasticsearch nats nats-streaming flask-server gql-bff react-ui || true",
+              "docker rm -f conductor-server conductor-ui redis elasticsearch nats nats-streaming flask-server gql-bff react-ui || true",
+
+              "echo '--- Cleaning up Docker system to free up space ---'",
+              "docker system prune -af",
+
+              "echo '--- Removing old Docker network ---'",
+              "docker network rm conductor-dev-net || true",
+              "docker network prune -f",
+
+              "echo '--- Creating Docker network ---'",
               "docker network create conductor-dev-net",
-              
-              "echo '=== CLONING REPOSITORY ==='",
+
+              "echo '--- Setting up repository for custom services ---'",
               "cd /home/ec2-user",
-              "rm -rf netflix_conductor",
+              "echo 'Removing existing repository for fresh clone...'",
+              "rm -rf netflix_conductor || true",
+              "echo 'Cloning fresh repository...'",
               "git clone https://github.com/mathiyarasuc/netflix_conductor.git",
               "cd netflix_conductor",
-              
-              "echo '=== STARTING INFRASTRUCTURE ==='",
-              "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always -v redis-data:/data --health-cmd='redis-cli ping || exit 1' --health-interval=30s --health-timeout=5s --health-retries=3 redis:6.2-alpine",
-              
-              "docker run -d --name elasticsearch --network conductor-dev-net -p 9200:9200 -p 9300:9300 -e 'ES_JAVA_OPTS=-Xms512m -Xmx1024m' -e 'discovery.type=single-node' -e 'xpack.security.enabled=false' -v elasticsearch-data:/usr/share/elasticsearch/data --restart always --health-cmd='curl -f http://localhost:9200/_cluster/health || exit 1' --health-interval=30s --health-timeout=10s --health-retries=5 --health-start-period=60s elasticsearch:7.17.9",
-              
-              "docker run -d --name nats --network conductor-dev-net -p 4222:4222 -p 8222:8222 --restart always nats:latest -js --http_port 8222",
-              
-              "docker run -d --name nats-streaming --network conductor-dev-net -p 4223:4222 -p 8223:8222 --restart always nats-streaming:latest -m 8222",
-              
+
+              "echo '--- Starting Redis container (Primary DB + Queue) with VERIFIED Health Check ---'",
+              "docker run -d --name redis --network conductor-dev-net -p 6379:6379 --restart always -v redis-data:/data --health-cmd='redis-cli ping || exit 1' --health-interval=30s --health-timeout=5s --health-retries=3 --health-start-period=10s redis:6.2-alpine redis-server --save 20 1 --loglevel warning",
+
+              "echo '--- Starting Elasticsearch container (Search/Indexing) with VERIFIED Health Check ---'",
+              "docker run -d --name elasticsearch --network conductor-dev-net --network-alias es -p 9200:9200 -p 9300:9300 -e 'ES_JAVA_OPTS=-Xms512m -Xmx1024m' -e 'transport.host=0.0.0.0' -e 'discovery.type=single-node' -e 'xpack.security.enabled=false' -v elasticsearch-data:/usr/share/elasticsearch/data --restart always --health-cmd='curl -f http://localhost:9200/_cluster/health || exit 1' --health-interval=30s --health-timeout=10s --health-retries=5 --health-start-period=60s elasticsearch:7.17.9",
+
+              "echo '--- Starting NATS container with Health Check ---'",
+              "docker run -d --name nats --network conductor-dev-net -p 4222:4222 -p 8222:8222 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:8222/varz || exit 1' --health-interval=30s --health-timeout=5s --health-retries=3 --health-start-period=10s nats:latest -js --http_port 8222",
+
+              "echo '--- Starting NATS Streaming container with Health Check ---'",
+              "docker run -d --name nats-streaming --network conductor-dev-net -p 4223:4222 -p 8223:8222 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:8222/ || exit 1' --health-interval=30s --health-timeout=5s --health-retries=3 --health-start-period=15s nats-streaming:latest -m 8222",
+
+              "echo '--- Waiting for core services to be ready ---'",
               "sleep 45",
-              
-              "echo '=== STARTING CONDUCTOR ==='",
-              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -p 8090:8090 --restart always -e CONFIG_PROP=config-local.properties --health-cmd='curl -f http://localhost:8080/health || exit 1' --health-interval=30s --health-timeout=15s --health-retries=5 --health-start-period=90s niemen/conductor-server:7.2.2",
-              
-              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s niemen/conductor-ui:4.0.1",
-              
+
+              "echo '--- Starting Conductor Server (Official Image) with Health Check ---'",
+              "docker run -d --name conductor-server --network conductor-dev-net -p 8080:8080 -p 8090:8090 --restart always -e CONFIG_PROP=config-local.properties -e ES_VERSION=7 -e INDEXING_ENABLED=true -e JAVA_OPTS='-Dpolyglot.engine.WarnInterpreterOnly=false' --health-cmd='curl -f http://localhost:8080/health || exit 1' --health-interval=30s --health-timeout=15s --health-retries=5 --health-start-period=90s niemen/conductor-server:7.2.2",
+
+              "echo '--- Starting Conductor UI (Official Image) with Health Check ---'",
+              "docker run -d --name conductor-ui --network conductor-dev-net -p 5000:5000 -e WF_SERVER=http://conductor-server:8080 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=40s niemen/conductor-ui:4.0.1",
+
+              "echo '--- Waiting for Conductor services to stabilize ---'",
               "sleep 30",
-              
-              "echo '=== BUILDING CUSTOM SERVICES ==='",
-              "docker build --quiet -t flask-server:latest ./tool_executor",
-              "docker build --quiet -t gql-bff:latest ./gql-bff",
-              "docker build --quiet -t react-ui:latest --build-arg REACT_APP_THEME=default --build-arg REACT_APP_VERSION=0.0.0 --build-arg REACT_APP_GQL=atlas-gql.enowclear360.com --build-arg REACT_APP_GQL_HTTP_PROTOCOL=https --build-arg REACT_APP_GQL_WS_PROTOCOL=wss --build-arg REACT_APP_USE_NBB_MESSAGE=true ./react-ui",
-              
-              "echo '=== STARTING CUSTOM SERVICES ==='",
-              "docker run -d --name flask-server --network conductor-dev-net -p 7000:7000 --restart always flask-server:latest",
-              
-              "docker run -d --name gql-bff --network conductor-dev-net -p 5001:5000 -e NODE_ENV=production -e PORT=5000 --add-host host.docker.internal:172.17.0.1 --restart always --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
-              
-              "docker run -d --name react-ui --network conductor-dev-net -p 3001:80 --restart always react-ui:latest",
-              
-              "sleep 30",
-              
-              "echo '=== DEPLOYMENT COMPLETE ==='",
-              "docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
+
+              "echo '--- Building and starting Flask Server (Tool Executor) ---'",
+              "docker build -t flask-server:latest ./tool_executor",
+              "docker run -d --name flask-server --network conductor-dev-net -p 7000:7000 -e FLASK_ENV=development --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:7000/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=30s flask-server:latest",
+
+              "echo '--- Building and starting GQL BFF (GraphQL Backend) - FIXED for GraphQL Mesh hostname bug ---'",
+              "docker build -t gql-bff:latest ./gql-bff",
+              "docker run -d --name gql-bff --network conductor-dev-net -p 5001:5000 -e NODE_ENV=development -e PORT=5000 -e ELASTIC_SEARCH_HOST=http://elasticsearch:9200 -e ELASTIC_USER= -e ELASTIC_PASSWORD= -e ELASTIC_VERSION=7 -e ELASTIC_PREFIX=atlas -e APOLLO_LOGGING_LEVEL=ERROR -e TOOLS_API_URL=http://flask-server:7000 -e AGENTS_API_URL=http://flask-server:7000 -e BASE_API_URL=http://host.docker.internal:8080 -e IS_MULTITENANT=false --add-host host.docker.internal:172.17.0.1 --restart always --health-cmd='curl -s http://localhost:5000/ >/dev/null 2>&1 || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s --entrypoint sh gql-bff:latest -c 'sleep 60 && yarn start'",
+
+              "echo '--- Building and starting React UI (Frontend - PRODUCTION BUILD) ---'",
+              "docker build -t react-ui:latest --build-arg REACT_APP_THEME=default --build-arg REACT_APP_VERSION=0.0.0 --build-arg REACT_APP_GQL=atlas-gql.enowclear360.com --build-arg REACT_APP_GQL_HTTP_PROTOCOL=https --build-arg REACT_APP_GQL_WS_PROTOCOL=wss --build-arg REACT_APP_USE_NBB_MESSAGE=true ./react-ui",
+              "docker run -d --name react-ui --network conductor-dev-net -p 3001:80 --restart always --health-cmd='wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1' --health-interval=30s --health-timeout=10s --health-retries=3 --health-start-period=60s react-ui:latest",
+
+              "echo '--- Waiting for all services to stabilize ---'",
+              "sleep 60",
+
+              "echo '--- Checking health status of all services ---'",
+              "docker ps --format 'table {{.Names}}\\t{{.Status}}\\t{{.Ports}}'",
+
+              "echo '--- DEPLOYMENT COMPLETED SUCCESSFULLY ---'",
+              "echo 'Conductor Server: http://localhost:8080'",
+              "echo 'Conductor UI: http://localhost:5000'", 
+              "echo 'Flask Server: http://localhost:7000'",
+              "echo 'GQL BFF: http://localhost:5001'",
+              "echo 'React UI: http://localhost:3001'"
             ]
           }
           EOF
@@ -88,30 +110,34 @@ jobs:
 
           COMMAND_ID=$(aws ssm send-command \
             --document-name "AWS-RunShellScript" \
+            --comment "Deploy Conductor + Custom Services" \
             --targets "Key=InstanceIds,Values=${{ env.EC2_INSTANCE_ID }}" \
             --parameters "$COMMANDS_JSON" \
             --region ${{ env.AWS_REGION }} \
             --query "Command.CommandId" \
             --output text)
 
-          echo "Waiting for deployment..."
-          for i in {1..40}; do
+          echo "Waiting for deployment to complete..."
+          while true; do
             STATUS=$(aws ssm list-command-invocations \
               --command-id "$COMMAND_ID" \
               --instance-id "${{ env.EC2_INSTANCE_ID }}" \
               --region ${{ env.AWS_REGION }} \
               --query 'CommandInvocations[0].Status' \
               --output text)
-            
-            echo "Status: $STATUS"
-            
+            echo "Deployment status: $STATUS"
+
             if [[ "$STATUS" == "Success" ]]; then
-              echo "✅ DEPLOYMENT SUCCESS"
-              exit 0
-            elif [[ "$STATUS" == "Failed" ]]; then
-              echo "❌ DEPLOYMENT FAILED"
+              echo "✅ DEPLOYMENT COMPLETED SUCCESSFULLY!"
+              break
+            elif [[ "$STATUS" == "Failed" || "$STATUS" == "Cancelled" || "$STATUS" == "TimedOut" ]]; then
+              echo "❌ DEPLOYMENT FAILED with status: $STATUS"
+              aws ssm get-command-invocation \
+                --command-id "$COMMAND_ID" \
+                --instance-id "${{ env.EC2_INSTANCE_ID }}" \
+                --query "StandardErrorContent" \
+                --output text
               exit 1
             fi
-            
             sleep 15
           done
