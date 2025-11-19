@@ -32,6 +32,7 @@ export const Drawer = styled(MuiDrawer, {
     bottom: '0',
     left: '0',
     zIndex: '1032',
+    backgroundColor:'#000000',
     transitionProperty: 'top, bottom, width',
     transitionDuration: '.2s, .2s, .35s',
     transitionTimingFunction: 'linear, linear, ease',

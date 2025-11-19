@@ -12,7 +12,7 @@ const joinNodeStyle = _theme => {
       position: 'absolute',
       zIndex: 10,
       left: size - 11,
-      top: size / 2 - 10
+      top: size / 2 - 8
     },
     joinSvg: {
       width: size,

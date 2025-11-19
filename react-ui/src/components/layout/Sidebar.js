@@ -11,10 +11,12 @@ import UserMenu from 'components/menu/UserMenu'
 import Menu from 'components/menu/Menu'
 import { sidebarWrapperHeight } from 'utils/constants'
 import { Drawer, SidebarRef, StyledLogo, Typography } from './SidebarStyle'
+import logo from 'assets/img/Elevatenowwhitelogo.svg'
+import logoIcon from 'assets/img/Logowhite.png'
 
 function SidebarWrapper({ children, drawerOpen }) {
   const sidebarWrapperRef = useRef()
-  
+
   const simpleBarStyle = { height: sidebarWrapperHeight, overflowX: 'hidden' }
 
   return (
@@ -38,8 +40,8 @@ function Sidebar({ drawerOpen, changeLanguage, closeDrawer, withGradient }) {
   }, [navigate])
 
   const logoContainerStyle = {
-    display: 'flex', 
-    alignItems: 'center', 
+    display: 'flex',
+    alignItems: 'center',
     cursor: 'pointer',
     textDecoration: 'none',
     padding: '15px 0px 30px 0'
@@ -52,7 +54,7 @@ function Sidebar({ drawerOpen, changeLanguage, closeDrawer, withGradient }) {
     flexShrink: 0,
     width: '30px',
     height: '30px',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#000000',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -88,23 +90,32 @@ function Sidebar({ drawerOpen, changeLanguage, closeDrawer, withGradient }) {
   const brand = (
     <StyledLogo>
       <div onClick={handleLogoClick} style={logoContainerStyle}>
-        <div style={logoIconStyle}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 4L20 20" stroke="white" strokeWidth="2" strokeLinecap="round"></path>
-            <path d="M20 4L4 20" stroke="white" strokeWidth="2" strokeLinecap="round"></path>
-            <path fillRule="evenodd" clipRule="evenodd" d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="white"></path>
-          </svg>
-        </div>
-        
-        {drawerOpen && (
-          <div className="app-title" style={titleContainerStyle}>
-            <h2 style={titleStyle}>
-              Artifi Agentic<br />Console
-            </h2>
-            <p style={subtitleStyle}>
-              Commercial Insurance Accelerator
-            </p>
+        {!drawerOpen && (
+          <div style={logoIconStyle}>
+            {/* <svg width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M4 4L20 20' stroke='white' strokeWidth='2' strokeLinecap='round'></path>
+            <path d='M20 4L4 20' stroke='white' strokeWidth='2' strokeLinecap='round'></path>
+            <path
+              fillRule='evenodd'
+              clipRule='evenodd'
+              d='M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z'
+              fill='white'
+            ></path>
+          </svg> */}
+            <img src={logoIcon} style={{ width: '100%', height: '30px', marginLeft: '10px' }} alt='...' />
           </div>
+        )}
+
+        {drawerOpen && (
+          // <div className="app-title" style={titleContainerStyle}>
+          //   <h2 style={titleStyle}>
+          //     Artifi Agentic<br />Console
+          //   </h2>
+          //   <p style={subtitleStyle}>
+          //     Commercial Insurance Accelerator
+          //   </p>
+          // </div>
+          <img src={logo} style={{ width: '75%', height: '30px', marginLeft: '25px' }} alt='...' />
         )}
       </div>
     </StyledLogo>
@@ -116,8 +127,8 @@ function Sidebar({ drawerOpen, changeLanguage, closeDrawer, withGradient }) {
     <div>
       <Hidden mdUp>
         <Drawer
-          variant="temporary"
-          anchor="right"
+          variant='temporary'
+          anchor='right'
           open={drawerOpen}
           onClose={closeDrawer}
           ModalProps={{
@@ -127,27 +138,17 @@ function Sidebar({ drawerOpen, changeLanguage, closeDrawer, withGradient }) {
         >
           {brand}
           <SidebarWrapper drawerOpen={drawerOpen}>
-            <UserMenu
-              drawerOpen={drawerOpen}
-              changeLanguage={changeLanguage}
-              language={i18n.language}
-              withGradient={withGradient}
-            />
+            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
             <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
           </SidebarWrapper>
           {appVersion}
         </Drawer>
       </Hidden>
       <Hidden smDown>
-        <Drawer anchor="left" variant="permanent" open={drawerOpen} drawerOpen={drawerOpen}>
+        <Drawer anchor='left' variant='permanent' open={drawerOpen} drawerOpen={drawerOpen}>
           {brand}
           <SidebarWrapper drawerOpen={drawerOpen}>
-            <UserMenu
-              drawerOpen={drawerOpen}
-              changeLanguage={changeLanguage}
-              language={i18n.language}
-              withGradient={withGradient}
-            />
+            <UserMenu drawerOpen={drawerOpen} changeLanguage={changeLanguage} language={i18n.language} withGradient={withGradient} />
             <Menu drawerOpen={drawerOpen} withGradient={withGradient} />
           </SidebarWrapper>
           {appVersion}

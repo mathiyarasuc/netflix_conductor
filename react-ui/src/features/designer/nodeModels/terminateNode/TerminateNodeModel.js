@@ -5,7 +5,7 @@ import { anyInOneOut } from '../validations'
 export default class TerminateNodeModel extends DefaultNodeModel {
   constructor(task) {
     const { name, type, color } = nodeConfig.TERMINATE
-    super({ name: task?.name ?? name, color })
+    super({ name: task?.name ?? name, color, type: task.type })
     this.type = type
 
     this.inputs = {

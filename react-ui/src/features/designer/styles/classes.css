@@ -4,8 +4,8 @@
   position: fixed !important;
   right: 0px;
   background-color: rgb(255, 255, 255, 0.9) !important;
-  background-image: linear-gradient(0deg, transparent 70%, rgba(80, 74, 74, 0.15) 72%, transparent 76%),
-    linear-gradient(90deg, transparent 70%, rgba(80, 74, 74, 0.15) 76%, transparent 72%);
+  /* background-image: linear-gradient(0deg, transparent 70%, rgba(80, 74, 74, 0.15) 72%, transparent 76%),
+    linear-gradient(90deg, transparent 70%, rgba(80, 74, 74, 0.15) 76%, transparent 72%); */
   background-size: 30px 30px;
 }
 
@@ -15,8 +15,8 @@
   min-height: 500px;
   bottom: 15px;
   background-color: rgb(255, 255, 255, 0.9) !important;
-  background-image: linear-gradient(0deg, transparent 70%, rgba(80, 74, 74, 0.15) 72%, transparent 76%),
-    linear-gradient(90deg, transparent 70%, rgba(80, 74, 74, 0.15) 76%, transparent 72%);
+  /* background-image: linear-gradient(0deg, transparent 70%, rgba(80, 74, 74, 0.15) 72%, transparent 76%),
+    linear-gradient(90deg, transparent 70%, rgba(80, 74, 74, 0.15) 76%, transparent 72%); */
   background-size: 10px 10px;
 }
 
@@ -117,20 +117,34 @@
 .srd-port {
   width: 20px;
   height: 20px;
-  background: rgba(199, 5, 5, 0.1);
+  border-radius: 50%;              /* makes it round */
+  background-color: #ffffff;       /* white fill */
+  border: 2px solid #afafaf;       /* black border */
+  display: flex;                   
+  align-items: center;             
+  justify-content: center;         
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+/* Optional hover effect */
+.srd-port:hover {
+  background-color: #f3f4f6;       /* light gray on hover */
+  transform: scale(1.1);           /* slight pop effect */
+}
+
 
 .circle-port {
   width: 20px;
   height: 20px;
   margin: 2px;
   border-radius: 4px;
-  background: #4299e1;
+  background: #1a56db;
   cursor: pointer;
 }
 
 .circle-port:hover {
-  background: #3182ce;
+  background: #1a56db;
 }
 
 .srd-port:hover,

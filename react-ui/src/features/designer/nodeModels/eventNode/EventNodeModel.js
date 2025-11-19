@@ -7,7 +7,7 @@ import { getDefaultEventMessage } from './functions'
 export default class EventNodeModel extends DefaultNodeModel {
   constructor(task) {
     const { name, type, color } = nodeConfig.EVENT
-    super({ name: task?.taskReferenceName ?? name, color })
+    super({ name: task?.taskReferenceName ?? name, color, type: task?.type })
     this.type = type
 
     this.inputs = {
@@ -20,7 +20,7 @@ export default class EventNodeModel extends DefaultNodeModel {
       startDelay: task?.startDelay ?? 0,
       sink: task?.sink ?? 'conductor',
       asyncComplete: task?.asyncComplete ?? false,
-      asyncHandler: ""
+      asyncHandler: ''
     }
 
     this.addPort(new DefaultPortModel({ in: true, name: 'in' }))

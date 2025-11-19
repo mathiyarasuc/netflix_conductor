@@ -16,41 +16,47 @@ const nodeConfigData = {
   START: {
     name: 'START',
     type: 'START',
-    color: 'rgb(0,0,0)',
+    color: '#E0F2FE',
+    iconColor: '#0D47A1',
     getInstance: () => new StartNodeModel()
   },
   LAMBDA: {
     name: 'LAMBDA',
     type: 'LAMBDA',
-    color: 'rgb(255,233,28)',
+    color: '#FFF9C4',
+    iconColor: '#FBC02D',
     hasParametersTab: true,
     getInstance: task => new LambdaNodeModel(task)
   },
   EVENT: {
     name: 'EVENT',
     type: 'EVENT',
-    color: 'rgb(254,58,158)',
+    color: '#F8BBD0',
+    iconColor: '#C2185B',
     hasParametersTab: true,
     getInstance: task => new EventNodeModel(task)
   },
   HTTP: {
     name: 'HTTP',
     type: 'HTTP',
-    color: 'rgb(255,152,0)',
+    color: '#FFE0B2',
+    iconColor: '#E65100',
     hasParametersTab: true,
     getInstance: task => new HttpNodeModel(task)
   },
   DECISION: {
     name: 'DECISION',
     type: 'DECISION',
-    color: 'rgb(20, 247, 127)',
+    color: '#C8E6C9',
+    iconColor: '#2E7D32',
     hasParametersTab: true,
     getInstance: task => new DecisionNodeModel(task)
   },
   TERMINATE: {
     name: 'TERMINATE',
     type: 'TERMINATE',
-    color: 'rgb(255,0,0)',
+    color: '#FFCDD2',
+    iconColor: '#C62828',
     hasParametersTab: false,
     terminationStatus: {
       completed: 'COMPLETED',
@@ -61,70 +67,79 @@ const nodeConfigData = {
   JOIN: {
     name: 'JOIN',
     type: 'JOIN',
-    color: 'rgb(63,81,181)',
+    color: '#C5CAE9',
+    iconColor: '#303F9F',
     hasParametersTab: true,
     getInstance: task => new JoinNodeModel(task)
   },
   FORK_JOIN: {
     name: 'FORK',
     type: 'FORK_JOIN',
-    color: 'rgb(53,137,204)',
+    color: '#BBDEFB',
+    iconColor: '#1976D2',
     getInstance: task => new ForkNodeModel(task)
   },
   FORK_JOIN_DYNAMIC: {
     name: 'DYNAMIC_FORK',
     type: 'FORK_JOIN_DYNAMIC',
-    color: 'rgb(177 94 224)',
+    color: '#E1BEE7',
+    iconColor: '#6A1B9A',
     hasParametersTab: true,
     getInstance: task => new DynamicForkNodeModel(task)
   },
   SUB_WORKFLOW: {
     name: 'SUB_WORKFLOW',
     type: 'SUB_WORKFLOW',
-    color: 'rgb(23,165,219)',
+    color: '#B3E5FC',
+    iconColor: '#0288D1',
     hasParametersTab: true,
     getInstance: task => new SubworkflowNodeModel(task)
   },
   TASK: {
     name: 'TASK',
     type: 'SIMPLE',
-    color: 'rgb(123,132,220)',
+    color: '#E8EAF6',
+    iconColor: '#3F51B5',
     hasParametersTab: true,
     getInstance: task => new TaskNodeModel(task)
   },
   SIMPLE: {
     name: 'TASK',
     type: 'SIMPLE',
-    color: 'rgb(123,132,220)',
+    color: '#E8EAF6',
+    iconColor: '#3F51B5',
     hasParametersTab: true,
     getInstance: task => new TaskNodeModel(task)
   },
   DYNAMIC: {
     name: 'TASK',
     type: 'DYNAMIC',
-    color: 'rgb(123,132,220)',
+    color: '#E8EAF6',
+    iconColor: '#3F51B5',
     hasParametersTab: true,
     getInstance: task => new TaskNodeModel(task)
   },
   END: {
     name: 'END',
     type: 'END',
-    color: 'rgb(0,0,0)',
+    color: '#F5F5F5',
+    iconColor: '#424242',
     getInstance: () => new EndNodeModel()
   },
-    // ✅ ADD THIS NEW ENTRY
+  // ✅ ADD THIS NEW ENTRY
   TOOL: {
     name: 'TOOL',
     type: 'HTTP',
-    color: 'rgb(76, 175, 80)',
+    color: '#E8F5E9',
+    iconColor: '#2E7D32',
     hasParametersTab: true,
     getInstance: tool => {
-      
       const toolName = tool?.name || tool?.toolName || 'unknown_tool'
-      
+
       return new HttpNodeModel({
         ...tool,
         type: 'HTTP',
+        type1: 'TOOL',
         name: toolName,
         taskReferenceName: tool?.taskReferenceName || `tool_${toolName}_${Date.now()}`,
         inputParameters: {
@@ -147,13 +162,15 @@ const nodeConfigData = {
   AGENT: {
     name: 'AGENT',
     type: 'HTTP', // Agents become HTTP tasks
-    color: 'rgb(156, 39, 176)', // Purple color matching tray
+    color: '#F3E5F5',
+    iconColor: '#6A1B9A',
     hasParametersTab: true,
     getInstance: agent => {
       const agentName = agent?.name || agent?.agentName || 'unknown_agent'
       return new HttpNodeModel({
         ...agent,
         type: 'HTTP',
+        type1: 'AGENT',
         name: agentName,
         taskReferenceName: agent?.taskReferenceName || `agent_${agentName}_${Date.now()}`,
         inputParameters: {

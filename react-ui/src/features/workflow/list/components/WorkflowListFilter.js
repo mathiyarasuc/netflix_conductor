@@ -21,10 +21,12 @@ const WorkflowListFilter = ({ loading, filters, onChangeFilters }) => {
 
   return (
     <>
-      <Card icon={Search}>
+      <Card
+       icon={Search}
+       >
         <div tabIndex='0'>
           <Grid container spacing={3}>
-            <Grid item lg={3} xs={12}>
+            <Grid item lg={4} xs={12}>
               <TextField
                 fullWidth
                 label={t('Workflow.Name')}

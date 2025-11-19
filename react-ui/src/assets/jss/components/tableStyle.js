@@ -13,12 +13,13 @@ const tableStyles = theme => ({
   },
   tableHeader: {
     ...theme.table.tableHeader,
-    backgroundColor: '#f0fbff',
-    color: "#555555",
+    backgroundColor: '#f1f5f9',
+    color: "#000000",
     whiteSpace: 'nowrap'
   },
   tableContent: {
     ...theme.table.tableContent,
+    color: "#000000",
     cursor: 'pointer'
   },
   itemSelected: {

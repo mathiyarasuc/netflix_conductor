@@ -31,7 +31,7 @@ const TrayWidgetList = ({ trayItems, loading, activeTask, setActiveTask }) => {
         return includes(filters.toLocaleLowerCase(), item?.name.toLocaleLowerCase())
       }, trayItems)
     : trayItems
-  const scrollableList = filteredList?.map(item => ({ ...item, height: item.isSystemTask ? 50 : item.name.length > 30 ? 80 : 65 }))
+  const scrollableList = filteredList?.map(item => ({ ...item, height: item.isSystemTask ? 65 : item.name.length > 30 ? 80 : 65 }))
 
   if (loading) return <FakeText lines={8} />
   return (

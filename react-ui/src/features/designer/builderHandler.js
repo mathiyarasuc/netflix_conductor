@@ -310,3 +310,80 @@ export const getTaskInputsWithTemplate = (input, template) => {
 
   return newInput
 }
+
+/**
+ * ✅ FIX: Get nodes in EXECUTION ORDER (following links from START to END)
+ * This replaces the buggy getNodes() which returns nodes in random creation order
+ */
+export const getNodesInExecutionOrder = engine => {
+  const links = engine.model.getLinks()
+  const startNode = getStartNode(links)
+
+  if (!startNode) return []
+
+  const nodesInOrder = []
+  const visited = new Set()
+
+  const traverseNode = node => {
+    if (!node || visited.has(node.getID())) return
+
+    visited.add(node.getID())
+    nodesInOrder.push(node)
+
+    // Stop at END node
+    if (node.type === nodeConfig.END.type) return
+
+    const outLinks = getLinksArray('out', node)
+
+    // ✅ FIX: Handle FORK specially - collect ALL parallel tasks before JOIN
+    if (node.type === nodeConfig.FORK_JOIN.type) {
+      // Collect all parallel branch tasks
+      const parallelTasks = []
+      let joinNode = null
+
+      outLinks.forEach(link => {
+        if (link && link.targetPort) {
+          const branchNode = link.targetPort.getNode()
+          if (branchNode && !visited.has(branchNode.getID())) {
+            visited.add(branchNode.getID())
+            parallelTasks.push(branchNode)
+
+            // Find the JOIN node (all branches should lead to same JOIN)
+            const branchOutLinks = getLinksArray('out', branchNode)
+            if (branchOutLinks.length > 0 && branchOutLinks[0] && branchOutLinks[0].targetPort) {
+              const potentialJoinNode = branchOutLinks[0].targetPort.getNode()
+              if (potentialJoinNode && potentialJoinNode.type === nodeConfig.JOIN.type) {
+                joinNode = potentialJoinNode
+              }
+            }
+          }
+        }
+      })
+
+      // Add all parallel tasks to the order
+      parallelTasks.forEach(task => nodesInOrder.push(task))
+
+      // Continue from JOIN node
+      if (joinNode && !visited.has(joinNode.getID())) {
+        traverseNode(joinNode)
+      }
+    } else if (node.type === nodeConfig.DECISION.type) {
+      // For decision nodes, traverse all branches
+      outLinks.forEach(link => {
+        if (link && link.targetPort) {
+          const nextNode = link.targetPort.getNode()
+          traverseNode(nextNode)
+        }
+      })
+    } else {
+      // For normal nodes, follow the first outgoing link
+      if (outLinks.length > 0 && outLinks[0] && outLinks[0].targetPort) {
+        const nextNode = outLinks[0].targetPort.getNode()
+        traverseNode(nextNode)
+      }
+    }
+  }
+
+  traverseNode(startNode)
+  return nodesInOrder
+}

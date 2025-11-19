@@ -225,6 +225,11 @@ def execute_agent(agent_name):
         thread_id = user_input.get('thread_id')
         message = user_input.get('message')
         
+        # ✅ FIX: Convert dict/list to JSON string if backend evaluated template returns object
+        if isinstance(message, (dict, list)):
+            logger.info(f"⚠️ Message is {type(message).__name__}, converting to JSON string")
+            message = json.dumps(message)
+        
         # Ensure thread_id is an integer
         if thread_id is None or thread_id == "":
             thread_id = random.randint(1, 100000)
@@ -255,8 +260,8 @@ def execute_agent(agent_name):
         
         # Prepare payload for FastAPI endpoint (matching your system)
         fastapi_payload = {
-            "agent_id": agent_config.get("AgentID"), #replaced with agent_id
-            "message": message,
+            "agent_id": agent_config.get("AgentID"),
+            "message": message,  # ← Now guaranteed to be string!
             "thread_id": thread_id
         }
         

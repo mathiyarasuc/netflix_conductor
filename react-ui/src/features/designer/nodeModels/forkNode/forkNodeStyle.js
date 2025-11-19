@@ -11,7 +11,7 @@ const forkNodeStyle = _theme => {
     outPort: {
       position: 'absolute',
       zIndex: 10,
-      left: size - 10,
+      left: size - 8,
       top: size / 2 - 10
     },
     forkSvg: {

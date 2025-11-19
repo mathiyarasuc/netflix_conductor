@@ -1,5 +1,5 @@
 const dynamicForkNodeStyle = _theme => {
-  const size = 80
+  const size = 85
 
   return {
     dynamicFork: {
@@ -18,13 +18,13 @@ const dynamicForkNodeStyle = _theme => {
     inPort: {
       position: 'absolute',
       zIndex: 10,
-      left: -10,
+      left: -9,
       top: size / 2
     },
     outPort: {
       position: 'absolute',
       zIndex: 10,
-      left: 100,
+      left: 105,
       top: size / 2
     }
   }

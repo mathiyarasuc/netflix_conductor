@@ -6,8 +6,9 @@ import { anyInOneOut } from '../validations'
 export default class HttpNodeModel extends DefaultNodeModel {
   constructor(task) {
     const { name, type, color } = nodeConfig.HTTP
-    super({ name: task?.name ?? name, color })
+    super({ name: task?.name ?? name, color: task.color ?? color, type: task?.type })
     this.type = type
+    this.type1= task?.type1 ?? '',
 
     this.inputs = {
       type: task?.type ?? type,

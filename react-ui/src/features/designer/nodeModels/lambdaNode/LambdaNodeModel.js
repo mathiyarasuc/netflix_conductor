@@ -6,7 +6,7 @@ import { anyInOneOut } from '../validations'
 export default class LambdaNodeModel extends DefaultNodeModel {
   constructor(task) {
     const { name, type, color } = nodeConfig.LAMBDA
-    super({ name: task?.name ?? name, color })
+    super({ name: task?.name ?? name, color, type: task?.type })
     this.type = type
 
     this.inputs = {

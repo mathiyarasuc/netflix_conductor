@@ -96,7 +96,8 @@ const menuStyle = theme => {
     menuActiveColor: {
       '&,&:hover,&:focus': {
         color: menuActiveColor,
-        background: ({ withGradient }) => (withGradient ? menuActiveBk : menuActiveBkColor)
+        // background: ({ withGradient }) => (withGradient ? menuActiveBk : menuActiveBkColor)
+        backgroundColor:'#2d3748'
       }
     },
     paddingLeft: {

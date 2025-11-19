@@ -56,7 +56,7 @@ const EditTaskModal = ({ onCancel, onSave, inputsLens, dirtyInfo, onPayloadChang
             <Tab label={t('EditTaskModal.Tabs.Advanced')} />
           </Tabs>
         </AppBar>
-        <Grid style={{ marginTop: '20px' }} item xs={12}>
+        {/* <Grid style={{ marginTop: '20px' }} item xs={12}>
           {tabIndex == 0 && <GeneralSettings inputsLens={inputsLens.inputs} validation={validation?.inputs} />}
           {tabIndex == 1 && (
             <InputParameters
@@ -64,9 +64,35 @@ const EditTaskModal = ({ onCancel, onSave, inputsLens, dirtyInfo, onPayloadChang
               inputTemplate={inputsLens.inputs.inputTemplate}
               nodeType={inputs?.type}
               onPayloadChange={onPayloadChange}
+              previousNodes={workflowTasks}
+              currentNodeId={inputs?.id}
+              currentTaskRef={inputs?.taskReferenceName}
             />
           )}
           {tabIndex == 2 && <AdvancedSettings inputsLens={inputsLens.inputs} validation={validation?.inputs} />}
+        </Grid> */}
+
+        <Grid style={{ marginTop: '20px' }} item xs={12}>
+          {/* Always mount all tab contents to preload data */}
+          <Box hidden={tabIndex !== 0}>
+            <GeneralSettings inputsLens={inputsLens.inputs} validation={validation?.inputs} />
+          </Box>
+
+          <Box hidden={tabIndex !== 1}>
+            <InputParameters
+              inputParametersLens={inputsLens.inputs.inputParameters}
+              inputTemplate={inputsLens.inputs.inputTemplate}
+              nodeType={inputs?.type}
+              onPayloadChange={onPayloadChange}
+              previousNodes={workflowTasks}
+              currentNodeId={inputs?.id}
+              currentTaskRef={inputs?.taskReferenceName}
+            />
+          </Box>
+
+          <Box hidden={tabIndex !== 2}>
+            <AdvancedSettings inputsLens={inputsLens.inputs} validation={validation?.inputs} />
+          </Box>
         </Grid>
       </Grid>
       <Box marginTop='20px'>

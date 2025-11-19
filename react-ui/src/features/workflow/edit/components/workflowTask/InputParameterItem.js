@@ -26,7 +26,7 @@ function InputParameterItem({ valueLens, param, onRemove, isFromTemplate, typeFr
     if (typeof value === 'string') return value
     else return JSON.stringify(value, null, '\t')
   }, [value])
-
+  
   return (
     <Grid item container xs={12} md={6} spacing={2}>
       {isJson() ? (

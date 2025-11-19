@@ -16,12 +16,30 @@ const JoinNodeWidget = ({ engine, node }) => {
       <JoinNode node={node} />
       <div className={classes.inPort}>
         <PortWidget engine={engine} port={node?.getPort('in')}>
-          <div className='srd-port' />
+          <div
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: '50%',
+              backgroundColor: '#fff',
+              border: '1px solid #000',
+              cursor: 'pointer'
+            }}
+          />
         </PortWidget>
       </div>
       <div className={classes.outPort}>
         <PortWidget engine={engine} port={node?.getPort('out')}>
-          <div className='srd-port' />
+          <div
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: '50%',
+              backgroundColor: '#fff',
+              border: '1px solid #000',
+              cursor: 'pointer'
+            }}
+          />
         </PortWidget>
       </div>
     </>

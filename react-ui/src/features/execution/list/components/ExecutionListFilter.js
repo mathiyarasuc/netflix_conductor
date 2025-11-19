@@ -61,7 +61,7 @@ const ExecutionListFilter = ({ filters, onApplyFilters, onResetFilters }) => {
           </Grid>
         </div>
       </Card>
-      <Button size='small' color='primary' right={true} onClick={handleResetFilters}>
+      <Button size='small' color='primary' right={true} onClick={handleResetFilters} style={{marginLeft:'10px'}}>
         {t('General.Buttons.ResetFilters')}
       </Button>
       <Button size='small' color='primary' right={true} onClick={handleApplyFilters}>

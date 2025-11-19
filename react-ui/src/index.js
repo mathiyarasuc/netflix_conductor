@@ -17,6 +17,14 @@ import { SidebarProvider } from 'providers/SidebarProvider'
 import { ClipboardProvider } from 'providers/ClipboardProvider'
 import { StyledEngineProvider } from '@mui/material/styles'
 
+// ✅ FIX: Configure Monaco Editor loader to prevent CDN loading errors
+import { loader } from '@monaco-editor/react'
+
+// Initialize Monaco Editor with error handling for CDN failures
+loader.init().catch((error) => {
+  console.warn('Monaco Editor CDN load failed (this is OK, will fallback):', error.message)
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(

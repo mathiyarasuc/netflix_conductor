@@ -10,7 +10,7 @@ import Tour from './tour/Tour'
 import EditTaskModal from './workflowTask/EditTaskModal'
 import CustomHeader from 'components/layout/CustomHeader'
 import { emptyObject, emptyString } from 'utils/constants'
-import { parseDiagramToJSON, decisionCasesToPorts } from 'features/designer/builderHandler'
+import { parseDiagramToJSON, decisionCasesToPorts, getNodesInExecutionOrder } from 'features/designer/builderHandler'
 import { nodeConfig } from 'features/designer/constants/NodeConfig'
 import { keys, includes, map, prop, reject, isNil } from 'ramda'
 import { isPropertyDirty } from '@totalsoft/change-tracking'
@@ -67,7 +67,8 @@ const WorkflowContainer = () => {
   const [inputsLens, inputsDirtyInfo, resetInputs] = useChangeTrackingLens()
   const inputs = inputsLens |> get
 
-  const workflowTasks = engine.model.getNodes() |> map(prop('inputs')) |> reject(isNil)
+  // ✅ FIX: Use execution order instead of random getNodes() order
+  const workflowTasks = getNodesInExecutionOrder(engine) |> map(prop('inputs')) |> reject(isNil)
 
   const [workflowLens, , resetWorkflow] = useChangeTrackingLens(defaultConfig)
   const workflow = workflowLens |> get
@@ -328,7 +329,7 @@ const WorkflowContainer = () => {
   useEffect(() => {
     setDrawerOpen(false)
     return () => setDrawerOpen(true)
-  })
+  }, [setDrawerOpen])  // ✅ FIX: Add dependency array to prevent re-running on every render
 
   useEffect(() => {
     setHeader(

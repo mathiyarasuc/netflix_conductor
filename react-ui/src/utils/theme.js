@@ -8,7 +8,7 @@ const artifiTheme = {
     ...defaultTheme.palette,
     secondary: {
       ...defaultTheme.palette.secondary,
-      main: '#4299e1',           // Your exact blue color
+      main: '#1a56db',           // Your exact blue color
       dark: '#3182ce',           // Darker shade for hover states
       light: '#63b3ed',          // Lighter shade for disabled states
       contrastText: '#FFFFFF',   // White text on blue background
@@ -16,7 +16,7 @@ const artifiTheme = {
     },
     gradients: {
       ...defaultTheme.palette.gradients,
-      secondary: 'linear-gradient(60deg, #4299e1, #63b3ed)'  // Blue gradient
+      secondary: 'linear-gradient(60deg, #1a56db, #1a56db)'  // Blue gradient
     }
   }
 }

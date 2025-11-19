@@ -11,7 +11,7 @@ type Agent {
   llmModel: String
   llmProvider: String
   managerAgentIntention: String
-  selectedKnowledgeBase: String
+  selectedKnowledgeBase: JSON  # ✅ FIXED: Changed from String to JSON
   selectedManagerAgents: [String]
 }
 
@@ -34,7 +34,7 @@ type AgentDetailsResponse {
   llmModel: String
   llmProvider: String
   managerAgentIntention: String
-  selectedKnowledgeBase: String
+  selectedKnowledgeBase: JSON  # ✅ FIXED: Changed from String to JSON
   selectedManagerAgents: [String]
 }
 

@@ -166,11 +166,26 @@ const getMostRightNodeX = engine => {
   return max
 }
 
+// const getNodeWidth = node => {
+//   if (node.options.name.length > 6) {
+//     return node.options.name.length * 8
+//   }
+//   return node.options.name.length * 12
+// }
+
 const getNodeWidth = node => {
-  if (node.options.name.length > 6) {
-    return node.options.name.length * 8
+  const httpRequest = node?.inputs?.inputParameters?.http_request || ''
+  const uri = httpRequest?.uri || ''
+
+  if (typeof uri === 'string' && uri.includes('/agents/') && uri.includes('/execute')) {
+    return 350
   }
-  return node.options.name.length * 12
+
+  const nodeName = node?.options?.name || node?.name || ''
+  if (nodeName.length > 6) {
+    return nodeName.length * 8
+  }
+  return nodeName.length * 12
 }
 
 const calculatePosition = (engine, branchX, branchY) => {

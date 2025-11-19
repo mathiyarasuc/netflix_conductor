@@ -131,11 +131,10 @@ const trayItemStyles = () => {
       height: '30px',
       width: '30px',
       color: 'white',
-      backgroundColor: 'rgb(76, 175, 80)', // Green color for tools
+      backgroundColor: nodeConfig.TOOL.color, // Green color for tools
       lineHeight: '30px',
       textAlign: 'center',
-      border: '2px solid #4caf50',
-      boxShadow: '0 2px 4px rgba(76, 175, 80, 0.3)'
+   
     },
 
     // ✅ ADD THIS NEW AGENT STYLE
@@ -145,11 +144,10 @@ const trayItemStyles = () => {
       height: '30px',
       width: '30px',
       color: 'white',
-      backgroundColor: 'rgb(156, 39, 176)', // Purple color for agents
+      backgroundColor: nodeConfig.AGENT.color, // Purple color for agents
       lineHeight: '30px',
       textAlign: 'center',
-      border: '2px solid #9c27b0',
-      boxShadow: '0 2px 4px rgba(156, 39, 176, 0.3)'
+   
     }
   }
 }

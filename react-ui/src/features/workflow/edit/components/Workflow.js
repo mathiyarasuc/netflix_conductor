@@ -64,7 +64,6 @@ const Workflow = ({ loading, isNew, resetWorkflow, isDirty, workflowLens, diagra
   const [processedTools, setProcessedTools] = useState([])
 
   useEffect(() => {
-
     switch (activeTask) {
       case tasksConfig.SYSTEM_TASKS:
         setTrayItems(systemTasks)
@@ -79,6 +78,7 @@ const Workflow = ({ loading, isNew, resetWorkflow, isDirty, workflowLens, diagra
             name: wfl.name,
             version: wfl.version,
             color: nodeConfig.SUB_WORKFLOW.color,
+            iconColor:nodeConfig.SUB_WORKFLOW.iconColor,
             isSystemTask: false,
             workflow: wfl
           }))
@@ -102,16 +102,14 @@ const Workflow = ({ loading, isNew, resetWorkflow, isDirty, workflowLens, diagra
         setTrayItems(trayList)
         break
       }
-      case tasksConfig.TOOLS: 
-      {
+      case tasksConfig.TOOLS: {
         if (!toolsCalled && !loadingTools) {
           runToolsQuery()
         }
         setTrayItems(processedTools)
         break
       }
-      case tasksConfig.AGENTS:
-      {
+      case tasksConfig.AGENTS: {
         if (!agentsCalled && !loadingAgents) {
           runAgentsQuery()
         }
@@ -142,14 +140,16 @@ const Workflow = ({ loading, isNew, resetWorkflow, isDirty, workflowLens, diagra
 
   useEffect(() => {
     if (toolsData?.getToolsList?.status === 'success') {
-      const toolsList = toolsData.getToolsList.tools?.map(toolName => ({
-        type: 'TOOL',
-        name: toolName,
-        color: 'rgb(76, 175, 80)',
-        isSystemTask: false,
-        toolName: toolName
-      })) || []
-      
+      const toolsList =
+        toolsData.getToolsList.tools?.map(toolName => ({
+          type: 'TOOL',
+          name: toolName,
+          color: '#E8F5E9',
+          iconColor: '#2E7D32',
+          isSystemTask: false,
+          toolName: toolName
+        })) || []
+
       setProcessedTools(toolsList)
     } else if (toolsData && toolsData.getToolsList?.status !== 'success') {
       setProcessedTools([])
@@ -158,13 +158,15 @@ const Workflow = ({ loading, isNew, resetWorkflow, isDirty, workflowLens, diagra
 
   useEffect(() => {
     if (agentsData?.getAgentsList?.status === 'success') {
-      const agentsList = agentsData.getAgentsList.agents?.map(agentName => ({
-        type: 'AGENT',
-        name: agentName,
-        color: 'rgb(156, 39, 176)', // Purple color for agents
-        isSystemTask: false,
-        agentName: agentName
-      })) || []
+      const agentsList =
+        agentsData.getAgentsList.agents?.map(agentName => ({
+          type: 'AGENT',
+          name: agentName,
+          color: '#F3E5F5',
+          iconColor: '#6A1B9A',
+          isSystemTask: false,
+          agentName: agentName
+        })) || []
       setProcessedAgents(agentsList)
     } else if (agentsData && agentsData.getAgentsList?.status !== 'success') {
       setProcessedAgents([])
