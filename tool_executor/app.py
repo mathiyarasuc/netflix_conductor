@@ -269,7 +269,7 @@ def execute_agent(agent_name):
         logger.info(f"📋 Payload structure: agent_config keys: {list(agent_config.keys())}")
         
         # POST to FastAPI endpoint
-        fastapi_url = "http://16.170.162.72:8000/query"
+        fastapi_url = "http://54.82.27.241:8000/query"
         
         response = requests.post(
             fastapi_url,
